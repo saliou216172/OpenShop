@@ -1,0 +1,66 @@
+{% extends 'base.html' %}
+{% block content %}
+{% load static %}
+<div class="container">
+    <div class="form-card">
+        <h2>Créer un compte</h2>
+        <p class="subtitle">Remplis les informations pas à pas</p>
+
+        <form method="POST" enctype="multipart/form-data" id="registerForm">
+            {% csrf_token %}
+            
+            <!-- Étape 1 -->
+            <div class="form-step active">
+                <div class="input-group">
+                    {{ form.username.label_tag }}
+                    {{ form.username }}
+                </div>
+                <div class="input-group">
+                    {{ form.name.label_tag }}
+                    {{ form.name }}
+                </div>
+                <div class="input-group">
+                    {{ form.email.label_tag }}
+                    {{ form.email }}
+                </div>
+            </div>
+
+            <!-- Étape 2 -->
+            <div class="form-step">
+                <div class="input-group">
+                    {{ form.phone.label_tag }}
+                    {{ form.phone }}
+                </div>
+                <div class="input-group">
+                    {{ form.profile.label_tag }}
+                    {{ form.profile }}
+                </div>
+            </div>
+
+            <!-- Étape 3 -->
+            <div class="form-step">
+                <div class="input-group">
+                    {{ form.password1.label_tag }}
+                    {{ form.password1 }}
+                </div>
+                <div class="input-group">
+                    {{ form.password2.label_tag }}
+                    {{ form.password2 }}
+                </div>
+            </div>
+
+            <div class="step-controls">
+                <button type="button" id="prevBtn" class="btn hidden">Précédent</button>
+                <button type="button" id="nextBtn" class="btn">Suivant</button>
+                <button type="submit" id="submitBtn" class="btn hidden">S’inscrire</button>
+            </div>
+        </form>
+
+        <p class="footer-text">
+            Déjà inscrit ? <a href="{% url 'authentication:login' %}">Se connecter</a>
+        </p>
+    </div>
+</div>
+
+<script src="{% static 'js/register.js' %}"></script>
+{% endblock %}

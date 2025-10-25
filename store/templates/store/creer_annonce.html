@@ -1,0 +1,61 @@
+{% extends 'base.html' %}
+{% block content %}
+{% load static %}
+
+<h1>Publier une annonce</h1>
+
+<form method="POST" enctype="multipart/form-data" id="formAnnonce">
+    {% csrf_token %}
+    <input type="hidden" name="step" value="{{ step }}">
+
+    {% if step == 1 %}
+    <!-- Étape 1 : Informations générales -->
+    <div class="form-step active">
+        <div class="form-group">
+            {{ form.titre.label_tag }} {{ form.titre }}
+        </div>
+        <div class="form-group">
+            {{ form.description.label_tag }} {{ form.description }}
+        </div>
+        <div class="form-group">
+            {{ form.categorie.label_tag }} {{ form.categorie }}
+        </div>
+        <div class="form-group">
+            {{ form.sous_categorie.label_tag }} {{ form.sous_categorie }}
+        </div>
+    </div>
+    {% endif %}
+
+    {% if step == 2 %}
+    <!-- Étape 2 : Contact et détails -->
+    <div class="form-step active">
+        <div class="form-group">
+            {{ form.prix.label_tag }} {{ form.prix }}
+        </div>
+        <div class="form-group">
+            {{ form.photo.label_tag }} {{ form.photo }}
+        </div>
+        <div class="form-group">
+            {{ form.telephone.label_tag }} {{ form.telephone }}
+        </div>
+        <div class="form-group">
+            {{ form.email_contact.label_tag }} {{ form.email_contact }}
+        </div>
+    </div>
+    {% endif %}
+
+    <div class="buttons">
+        {% if step == 2 %}
+            <button name="previous" class="btn btn-secondary">Précédent</button>
+            <button name="publish" class="btn btn-success">Publier</button>
+        {% else %}
+            <button name="next" class="btn btn-primary">Suivant</button>
+        {% endif %}
+    </div>
+</form>
+
+{% load static %}
+
+<script src="{% static 'js/ajouterAnnonce.js' %}"></script>
+
+{% endblock %}

@@ -1,0 +1,49 @@
+{% extends 'base.html'%}
+{% block content %}
+{% load static %}
+
+<h1>Bienvenue sur OpenShop</h1>
+<section class="deposer-annonce">
+  <div class="container">
+    <h2>Gagnez en visibilité !</h2>
+    <p>Publiez vos annonces gratuitement et trouvez rapidement vos clients.</p>
+    <a href="{% url 'creer_annonce' %}" class="btn-deposer">
+           <i class="fa fa-plus-circle"></i> Déposer une annonce
+    </a>
+
+  </div>
+</section>
+
+<div class="categories-container">
+    {% for categorie in categories %}
+        <a href="{% url 'annonces_par_categorie' categorie.id %}" class="categorie-card">
+            {{ categorie.nom }}
+        </a>
+    {% endfor %}
+</div>
+
+
+<!-- Section d'information temporaire -->
+<section class="info-section">
+  <div class="container">
+    <h2>Pourquoi choisir notre plateforme ?</h2>
+    <div class="info-cards">
+      <div class="card">
+        <h3>Simple à utiliser</h3>
+        <p>Publiez votre annonce en quelques clics, sans inscription compliquée.</p>
+      </div>
+      <div class="card">
+        <h3>Gratuit et rapide</h3>
+        <p>Déposez vos annonces gratuitement et touchez vos clients en un rien de temps.</p>
+      </div>
+      <div class="card">
+        <h3>Fiable et sécurisé</h3>
+        <p>Notre plateforme vérifie chaque annonce pour garantir la qualité et la sécurité.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+
+{% endblock %}

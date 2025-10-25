@@ -1,0 +1,79 @@
+{% load static %}
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
+
+    <title>openshop</title>
+</head>
+<body>  
+
+    <header>
+  <nav class="navbar">
+    <div class="logo">
+      <a href="{% url 'home' %}">OpenShop</a>
+    </div>
+
+    <!-- Menu principal -->
+    <ul class="nav-links" id="navLinks">
+      <li><a href="{% url 'creer_annonce' %}">Déposer une annonce</a></li>
+
+      {% if not user.is_authenticated %}
+        <li><a href="{% url 'authentication:login' %}">Se connecter</a></li>
+        <li><a href="{% url 'authentication:register' %}">S'inscrire</a></li>
+      {% else %}
+        <li><a href="{% url 'authentication:logout' %}">Se déconnecter</a></li>
+      {% endif %}
+    </ul>
+
+    <!-- Bouton hamburger -->
+    <div class="hamburger" id="hamburger">
+      <span></span>
+      <span></span>
+      <span></span>
+    </div>
+  </nav>
+</header>
+
+
+ <main>  
+         {% block content %}  
+         {% endblock %}
+</main>
+
+        
+<footer class="footer">
+  <div class="footer-container">
+    <div class="footer-about">
+      <h3>Orenda Tech</h3>
+      <p>Nous aidons les entreprises et les particuliers en Guinée à booster leur présence digitale à travers des solutions modernes et fiables.</p>
+    </div>
+    <div class="footer-services">
+      <h4>Nos services</h4>
+      <ul>
+        <li>Création de sites vitrines</li>
+        <li>Conception de logos</li>
+        <li>Affiches publicitaires</li>
+        <li>Hébergement web</li>
+      </ul>
+    </div>
+    <div class="footer-contact">
+      <h4>Contact</h4>
+      <p>Email : asbarry2468@gmail.com</p>
+      <p>Tél : +224 622 95 24 68</p>
+      <p>Conakry, Guinée</p>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <p>&copy; 2025 Orenda Tech - Tous droits réservés</p>
+  </div>
+</footer>
+
+
+  <script src="{% static 'js/hamburger.js' %}"></script>     
+</body>
+</html>

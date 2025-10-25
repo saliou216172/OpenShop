@@ -1,0 +1,25 @@
+{% extends 'base.html' %}
+{% block content %}
+{% load static %}
+ 
+    <div class="container">
+        <div class="form-card">
+              <h2>Conexion</h2>
+              <p class="subtile">Connectez vous à votre compte</p>
+              <form method="POST" action="">
+                        {% csrf_token %}
+                        {% for field in form%}
+                            <div class="input-group">
+                                 {{ field.label_tag }}
+                                 {{ field }}
+                                 {% if field.errors %}
+                                    <p class="error-text">{{ field.errors|striptags}}</p>
+                                 {% endif %}
+                            </div>
+                        {% endfor %}
+                        <button type="submit" class="btn">Se connecter</button>
+              </form>     
+              <p class="footer-text"> Pas encore de compte? <a href="{% url 'authentication:register' %}">Créer un compte</a></p>
+        </div>
+    </div>
+{% endblock content %}
