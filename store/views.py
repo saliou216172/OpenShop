@@ -43,7 +43,12 @@ def annonces_par_souscategorie(request, souscategorie_id):
 
 
 def get_sous_categories(request):
-    """Vue appelée en AJAX pour charger les sous-catégories selon la catégorie choisie"""
     categorie_id = request.GET.get('categorie_id')
-    sous_categories = SousCategorie.objects.filter(categorie_id=categorie_id).values('id', 'nom')
-    return JsonResponse(list(sous_categories), safe=False)
+
+    if not categorie_id:
+        return JsonResponse([], safe=False)
+
+    sous_categories = SousCategorie.objects.filter(categorie_id=categorie_id)
+    data = [{'id': sc.id, 'nom': sc.nom} for sc in sous_categories]
+
+    return JsonResponse(data, safe=False)
