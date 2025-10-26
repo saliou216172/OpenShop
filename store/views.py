@@ -5,72 +5,46 @@ from.models import Annonce, Categorie, SousCategorie
 from django.http import JsonResponse
 
 
-@login_required(login_url="authentication:login")
+
+@login_required
 def creer_annonce(request):
     step = int(request.POST.get('step', 1))
-    annonce = None
 
-    # Récupérer l'annonce temporaire depuis la session si elle existe
-    annonce_id = request.session.get('annonce_id')
-    if annonce_id:
-        try:
-            annonce = Annonce.objects.get(id=annonce_id, auteur=request.user)
-        except Annonce.DoesNotExist:
-            annonce = None
+    if request.method == "POST":
+        # Récupération de l'annonce si déjà créée
+        annonce_id = request.session.get('annonce_id')
+        instance = get_object_or_404(Annonce, id=annonce_id) if annonce_id else None
+        form = AnnonceForm(request.POST, request.FILES, instance=instance)
 
-    if request.method == 'POST':
-        # Créer le formulaire avec l'instance si elle existe
-        form = AnnonceForm(request.POST, request.FILES, instance=annonce)
-
-        # --------------------------
-        # Étape 1 : Suivant
-        # --------------------------
         if step == 1 and 'next' in request.POST:
-            # rendre champs étape 2 non requis temporairement
+            # rendre champs étape 2 non requis
             for field in ['prix', 'photo', 'telephone', 'email_contact']:
                 form.fields[field].required = False
 
             if form.is_valid():
-                # sauvegarder l'annonce partiellement
                 annonce = form.save(commit=False)
                 annonce.auteur = request.user
                 annonce.save()
-                # stocker l'ID de l'annonce pour l'étape 2
                 request.session['annonce_id'] = annonce.id
-                step = 2
+                step = 2  # passer à l'étape 2
             else:
-                step = 1
+                step = 1  # rester sur étape 1 si invalide
 
-        # --------------------------
-        # Étape 2 : Précédent
-        # --------------------------
         elif step == 2 and 'previous' in request.POST:
             step = 1
 
-        # --------------------------
-        # Étape 2 : Publier
-        # --------------------------
         elif step == 2 and 'publish' in request.POST:
-            # rendre champs de l'étape 2 non requis sauf ceux nécessaires
-            for field in ['prix', 'photo', 'telephone', 'email_contact']:
-                form.fields[field].required = False
-
             if form.is_valid():
                 annonce = form.save(commit=False)
                 annonce.auteur = request.user
-                # vérifier la correspondance sous-catégorie/catégorie
-                if annonce.sous_categorie and annonce.sous_categorie.categorie != annonce.categorie:
-                    form.add_error('sous_categorie', 'La sous-catégorie ne correspond pas à la catégorie sélectionnée.')
-                else:
-                    annonce.save()
-                    # supprimer l'annonce temporaire de la session
-                    if 'annonce_id' in request.session:
-                        del request.session['annonce_id']
-                    return redirect('home')
+                annonce.save()
+                request.session.pop('annonce_id', None)
+                return redirect('home')
     else:
-        form = AnnonceForm(instance=annonce)
+        form = AnnonceForm()
+        step = 1
 
-    return render(request, 'store/creer_annonce.html', {'form': form, 'step': step})
+    return render(request, "store/creer_annonce.html", {'form': form, 'step': step})
 
 def home(request):
     categories = Categorie.objects.all()
