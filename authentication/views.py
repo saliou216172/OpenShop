@@ -5,18 +5,22 @@ from . forms import RegisterForm, LoginForm
 
 
 def register_view(request):
-    current_step = int(request.POST.get('current_step', 1))
-
+    """
+    Formulaire d'inscription multi-champs, single page, sans JS.
+    """
     if request.method == "POST":
         form = RegisterForm(request.POST, request.FILES)
-        if form.is_valid() and current_step == 3:  # dernière étape
+        print("POST reçu :", request.POST)  # pour debug sur Render
+        if form.is_valid():
             user = form.save()
             login(request, user)
             return redirect("home")
+        else:
+            print("Erreurs formulaire :", form.errors)
     else:
         form = RegisterForm()
 
-    return render(request, "authentication/register.html", {"form": form, "current_step": current_step})
+    return render(request, "authentication/register.html", {"form": form})
 
 
 def login_view(request):
