@@ -244,7 +244,65 @@
 
 
 /* Publier annonce */
-
+.container {
+    max-width: 600px;
+    margin: 40px auto;
+    background: #fff;
+    border-radius: 16px;
+    box-shadow: 0 0 15px rgba(0,0,0,0.1);
+    padding: 30px;
+    font-family: 'Poppins', sans-serif;
+}
+h2 {
+    text-align: center;
+    color: #333;
+    margin-bottom: 10px;
+}
+.subtitle {
+    text-align: center;
+    color: #777;
+    font-size: 14px;
+    margin-bottom: 25px;
+}
+.input-group {
+    margin-bottom: 20px;
+}
+label {
+    display: block;
+    font-weight: 600;
+    margin-bottom: 8px;
+}
+input[type="text"], input[type="file"], textarea, select {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 10px;
+    transition: 0.3s;
+}
+input:focus, textarea:focus, select:focus {
+    border-color: #0d6efd;
+    box-shadow: 0 0 4px rgba(13,110,253,0.3);
+    outline: none;
+}
+.btn {
+    width: 100%;
+    background: #0d6efd;
+    color: white;
+    padding: 12px;
+    border: none;
+    border-radius: 10px;
+    font-size: 16px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: 0.3s;
+}
+.btn:hover {
+    background: #0b5ed7;
+}
+.error-text {
+    color: red;
+    font-size: 13px;
+}
 
 
 /* Login */

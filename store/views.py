@@ -4,30 +4,21 @@ from.forms import AnnonceForm
 from.models import Annonce, Categorie, SousCategorie
 from django.http import JsonResponse
 
-from django.contrib.auth.decorators import login_required
-from django.shortcuts import render, redirect
-from .forms import AnnonceForm
-from .models import SousCategorie
-
 @login_required(login_url='authentication:login')
 def creer_annonce(request):
-    categorie_id = request.POST.get('categorie')
-    sous_categories = SousCategorie.objects.filter(categorie_id=categorie_id) if categorie_id else SousCategorie.objects.none()
-
-    if request.method == "POST" and 'submit' in request.POST:
+    form = AnnonceForm()
+    if request.method == "POST":
         form = AnnonceForm(request.POST, request.FILES)
         if form.is_valid():
             annonce = form.save(commit=False)
             annonce.auteur = request.user
             annonce.save()
             return redirect('home')
-    else:
-        form = AnnonceForm()
 
-    form.fields['sous_categorie'].queryset = sous_categories
-
-    return render(request, "store/creer_annonce.html", {
-        "form": form,
+    categories = Categorie.objects.all()
+    return render(request, 'store/creer_annonce.html', {
+        'form': form,
+        'categories': categories,
     })
 
 def home(request):
@@ -51,6 +42,8 @@ def annonces_par_souscategorie(request, souscategorie_id):
     })
 
 
-def get_sous_categories(request, categorie_id):
+def get_sous_categories(request):
+    """Vue appelée en AJAX pour charger les sous-catégories selon la catégorie choisie"""
+    categorie_id = request.GET.get('categorie_id')
     sous_categories = SousCategorie.objects.filter(categorie_id=categorie_id).values('id', 'nom')
     return JsonResponse(list(sous_categories), safe=False)
