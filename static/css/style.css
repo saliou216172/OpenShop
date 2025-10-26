@@ -122,7 +122,7 @@
 
 /*  NOUVAUX  */
 
-.categories-container, .souscategories-container, .annonces-container {
+ .annonces-container {
     display: flex;
     flex-wrap: wrap;
     gap: 20px;
@@ -147,7 +147,7 @@
     box-shadow: 0 5px 15px rgba(0,0,0,0.2);
 }
 
-.souscategories-container {
+.souscategories-container, .categories-container {
     flex-wrap: nowrap;
     overflow-x: auto;
     padding-bottom: 10px;
