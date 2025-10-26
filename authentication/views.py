@@ -5,15 +5,19 @@ from . forms import RegisterForm, LoginForm
 
 
 def register_view(request):
+    current_step = int(request.POST.get('current_step', 1))
+
     if request.method == "POST":
         form = RegisterForm(request.POST, request.FILES)
-        if form.is_valid():
+        if form.is_valid() and current_step == 3:  # dernière étape
             user = form.save()
-            login(request,user)
+            login(request, user)
             return redirect("home")
     else:
-            form = RegisterForm()
-    return render(request, "authentication/register.html", {"form": form})
+        form = RegisterForm()
+
+    return render(request, "authentication/register.html", {"form": form, "current_step": current_step})
+
 
 def login_view(request):
     if request.method == "POST":

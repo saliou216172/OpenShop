@@ -6,11 +6,12 @@
         <h2>Créer un compte</h2>
         <p class="subtitle">Remplis les informations pas à pas</p>
 
-        <form method="POST" enctype="multipart/form-data" id="registerForm">
+        <form method="POST" enctype="multipart/form-data">
             {% csrf_token %}
-            
-            <!-- Étape 1 -->
-            <div class="form-step active">
+            <input type="hidden" name="current_step" value="{{ current_step }}">
+
+            {% if current_step == 1 %}
+            <div class="form-step">
                 <div class="input-group">
                     {{ form.username.label_tag }}
                     {{ form.username }}
@@ -23,9 +24,9 @@
                     {{ form.email.label_tag }}
                     {{ form.email }}
                 </div>
+                <button type="submit" name="next" class="btn">Suivant</button>
             </div>
-
-            <!-- Étape 2 -->
+            {% elif current_step == 2 %}
             <div class="form-step">
                 <div class="input-group">
                     {{ form.phone.label_tag }}
@@ -35,9 +36,10 @@
                     {{ form.profile.label_tag }}
                     {{ form.profile }}
                 </div>
+                <button type="submit" name="prev" class="btn">Précédent</button>
+                <button type="submit" name="next" class="btn">Suivant</button>
             </div>
-
-            <!-- Étape 3 -->
+            {% elif current_step == 3 %}
             <div class="form-step">
                 <div class="input-group">
                     {{ form.password1.label_tag }}
@@ -47,13 +49,10 @@
                     {{ form.password2.label_tag }}
                     {{ form.password2 }}
                 </div>
+                <button type="submit" name="prev" class="btn">Précédent</button>
+                <button type="submit" class="btn">S’inscrire</button>
             </div>
-
-            <div class="step-controls">
-                <button type="button" id="prevBtn" class="btn hidden">Précédent</button>
-                <button type="button" id="nextBtn" class="btn">Suivant</button>
-                <button type="submit" id="submitBtn" class="btn hidden">S’inscrire</button>
-            </div>
+            {% endif %}
         </form>
 
         <p class="footer-text">
@@ -61,6 +60,4 @@
         </p>
     </div>
 </div>
-
-<script src="{% static 'js/register.js' %}"></script>
 {% endblock %}
