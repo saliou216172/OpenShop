@@ -5,46 +5,18 @@ from.models import Annonce, Categorie, SousCategorie
 from django.http import JsonResponse
 
 
-
 @login_required
 def creer_annonce(request):
-    step = int(request.POST.get('step', 1))
-
     if request.method == "POST":
-        # Récupération de l'annonce si déjà créée
-        annonce_id = request.session.get('annonce_id')
-        instance = get_object_or_404(Annonce, id=annonce_id) if annonce_id else None
-        form = AnnonceForm(request.POST, request.FILES, instance=instance)
-
-        if step == 1 and 'next' in request.POST:
-            # rendre champs étape 2 non requis
-            for field in ['prix', 'photo', 'telephone', 'email_contact']:
-                form.fields[field].required = False
-
-            if form.is_valid():
-                annonce = form.save(commit=False)
-                annonce.auteur = request.user
-                annonce.save()
-                request.session['annonce_id'] = annonce.id
-                step = 2  # passer à l'étape 2
-            else:
-                step = 1  # rester sur étape 1 si invalide
-
-        elif step == 2 and 'previous' in request.POST:
-            step = 1
-
-        elif step == 2 and 'publish' in request.POST:
-            if form.is_valid():
-                annonce = form.save(commit=False)
-                annonce.auteur = request.user
-                annonce.save()
-                request.session.pop('annonce_id', None)
-                return redirect('home')
+        form = AnnonceForm(request.POST, request.FILES)
+        if form.is_valid():
+            annonce = form.save(commit=False)
+            annonce.auteur = request.user
+            annonce.save()
+            return redirect('home')
     else:
         form = AnnonceForm()
-        step = 1
-
-    return render(request, "store/creer_annonce.html", {'form': form, 'step': step})
+    return render(request, "store/creer_annonce.html", {"form": form})
 
 def home(request):
     categories = Categorie.objects.all()

@@ -2,35 +2,29 @@
 {% block content %}
 {% load static %}
 
-<h1>Publier une annonce</h1>
+<div class="container">
+    <div class="form-card">
+        <h2>Publier une annonce</h2>
+        <p class="subtitle">Remplis les informations de ton annonce</p>
 
-<form method="POST" enctype="multipart/form-data" id="formAnnonce">
-    {% csrf_token %}
-    <input type="hidden" name="step" value="{{ step }}">
+        <form method="POST" enctype="multipart/form-data">
+            {% csrf_token %}
+            {% for field in form %}
+                <div class="input-group">
+                    {{ field.label_tag }}
+                    {{ field }}
+                    {% if field.errors %}
+                        <p class="error-text">{{ field.errors|striptags }}</p>
+                    {% endif %}
+                </div>
+            {% endfor %}
+            <button type="submit" class="btn">Publier maintenant</button>
+        </form>
 
-    {% if step == 1 %}
-    <div class="form-step active">
-        <div class="form-group">{{ form.titre.label_tag }} {{ form.titre }}</div>
-        <div class="form-group">{{ form.description.label_tag }} {{ form.description }}</div>
-        <div class="form-group">{{ form.categorie.label_tag }} {{ form.categorie }}</div>
-        <div class="form-group">{{ form.sous_categorie.label_tag }} {{ form.sous_categorie }}</div>
+        <p class="footer-text">
+            <a href="{% url 'home' %}">Retour à l’accueil</a>
+        </p>
     </div>
-    <button name="next" class="btn btn-primary">Suivant</button>
-    {% endif %}
-
-    {% if step == 2 %}
-    <div class="form-step active">
-        <div class="form-group">{{ form.prix.label_tag }} {{ form.prix }}</div>
-        <div class="form-group">{{ form.photo.label_tag }} {{ form.photo }}</div>
-        <div class="form-group">{{ form.telephone.label_tag }} {{ form.telephone }}</div>
-        <div class="form-group">{{ form.email_contact.label_tag }} {{ form.email_contact }}</div>
-    </div>
-    <button name="previous" class="btn btn-secondary">Précédent</button>
-    <button name="publish" class="btn btn-success">Publier</button>
-    {% endif %}
-</form>
-
-
-<script src="{% static 'js/ajouterAnnonce.js' %}"></script>
+</div>
 
 {% endblock %}
