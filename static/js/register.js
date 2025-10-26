@@ -26,3 +26,9 @@ prevBtn.addEventListener("click", () => {
 });
 
 showStep(currentStep);
+
+// Soumettre le formulaire quand on clique sur "S’inscrire"
+submitBtn.addEventListener("click", function (e) {
+    e.preventDefault(); // empêche tout bug d'affichage
+    document.getElementById("registerForm").submit(); // soumission réelle du formulaire
+});
