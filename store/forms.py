@@ -13,7 +13,7 @@ class AnnonceForm(forms.ModelForm):
             'sous_categorie': forms.Select(attrs={'class': 'form-control'}),
             'prix': forms.NumberInput(attrs={'class': 'form-control', 'placeholder': 'Prix en GNF'}),
             'photo': forms.ClearableFileInput(attrs={'class': 'form-control-file'}),
-            'telephone': forms.TextInput(attrs={'class': 'form-control', 'placeholder': 'Votre téléphone'}),
+            'telephone': forms.TextInput(attrs={'class': 'form-control', 'placeholder': 'Votre numéro whatssap'}),
             'email_contact': forms.EmailInput(attrs={'class': 'form-control', 'placeholder': 'Email (facultatif)'}),
         }
 
