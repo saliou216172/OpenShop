@@ -1,37 +1,37 @@
 {% extends 'base.html' %}
-{% block content %}
 {% load static %}
+{% block content %}
 
 <div class="container">
-    <div class="form-card">
-        <h2>Publier une annonce</h2>
-        <p class="subtitle">Remplis les informations de ton annonce</p>
+    <h2>Publier une annonce</h2>
+    <p class="subtitle">Remplis les informations de ton annonce</p>
 
-        <form method="POST" enctype="multipart/form-data">
-            {% csrf_token %}
-            {% for field in form %}
-                <div class="input-group">
-                    {{ field.label_tag }}
-                    {% if field.name == "categorie" %}
-                        <select name="categorie" class="input-field" onchange="this.form.submit()">
-                            <option value="">Sélectionne une catégorie</option>
-                            {% for cat in form.fields.categorie.queryset %}
-                                <option value="{{ cat.id }}" {% if cat.id|stringformat:"s" == request.POST.categorie %}selected{% endif %}>
-                                    {{ cat.nom }}
-                                </option>
-                            {% endfor %}
-                        </select>
-                    {% else %}
-                        {{ field }}
-                    {% endif %}
-                    {% if field.errors %}
-                        <p class="error-text">{{ field.errors|striptags }}</p>
-                    {% endif %}
-                </div>
-            {% endfor %}
-            <button type="submit" name="submit" class="btn">Publier maintenant</button>
-        </form>
-    </div>
+    <form method="POST" enctype="multipart/form-data" id="annonceForm">
+        {% csrf_token %}
+        <div class="input-group">
+            <label for="categorie">Catégorie</label>
+            <select id="categorie" name="categorie" required>
+                <option value="">Sélectionne une catégorie</option>
+                {% for cat in categories %}
+                    <option value="{{ cat.id }}">{{ cat.nom }}</option>
+                {% endfor %}
+            </select>
+        </div>
+
+        <div class="input-group">
+            <label for="sous_categorie">Sous-catégorie</label>
+            <select id="sous_categorie" name="sous_categorie" required>
+                <option value="">Sélectionne d’abord une catégorie</option>
+            </select>
+        </div>
+
+        {{ form.titre.label_tag }} {{ form.titre }}
+        {{ form.description.label_tag }} {{ form.description }}
+        {{ form.image.label_tag }} {{ form.image }}
+
+        <button type="submit" class="btn">Publier maintenant</button>
+    </form>
 </div>
 
+<script src="{% static 'js/ajouterAnnonce.js' %}"></script>
 {% endblock %}
