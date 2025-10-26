@@ -5,54 +5,20 @@
 <div class="container">
     <div class="form-card">
         <h2>Créer un compte</h2>
-        <p class="subtitle">Remplis les informations pas à pas</p>
+        <p class="subtitle">Remplis les informations pour t’inscrire</p>
 
         <form method="POST" enctype="multipart/form-data">
             {% csrf_token %}
-
-            <!-- Étape 1 -->
-            <div class="form-step">
+            {% for field in form %}
                 <div class="input-group">
-                    {{ form.username.label_tag }}
-                    {{ form.username }}
+                    {{ field.label_tag }}
+                    {{ field }}
+                    {% if field.errors %}
+                        <p class="error-text">{{ field.errors|striptags }}</p>
+                    {% endif %}
                 </div>
-                <div class="input-group">
-                    {{ form.name.label_tag }}
-                    {{ form.name }}
-                </div>
-                <div class="input-group">
-                    {{ form.email.label_tag }}
-                    {{ form.email }}
-                </div>
-            </div>
-
-            <!-- Étape 2 -->
-            <div class="form-step">
-                <div class="input-group">
-                    {{ form.phone.label_tag }}
-                    {{ form.phone }}
-                </div>
-                <div class="input-group">
-                    {{ form.profile.label_tag }}
-                    {{ form.profile }}
-                </div>
-            </div>
-
-            <!-- Étape 3 -->
-            <div class="form-step">
-                <div class="input-group">
-                    {{ form.password1.label_tag }}
-                    {{ form.password1 }}
-                </div>
-                <div class="input-group">
-                    {{ form.password2.label_tag }}
-                    {{ form.password2 }}
-                </div>
-            </div>
-
-            <div class="step-controls">
-                <button type="submit" class="btn">S’inscrire</button>
-            </div>
+            {% endfor %}
+            <button type="submit" class="btn">S’inscrire</button>
         </form>
 
         <p class="footer-text">
@@ -61,5 +27,4 @@
     </div>
 </div>
 
-<link rel="stylesheet" href="{% static 'css/register.css' %}">
 {% endblock %}

@@ -5,22 +5,16 @@ from . forms import RegisterForm, LoginForm
 
 
 def register_view(request):
-    """
-    Formulaire d'inscription multi-champs, single page, sans JS.
-    """
     if request.method == "POST":
         form = RegisterForm(request.POST, request.FILES)
-        print("POST reçu :", request.POST)  # pour debug sur Render
         if form.is_valid():
             user = form.save()
             login(request, user)
             return redirect("home")
-        else:
-            print("Erreurs formulaire :", form.errors)
     else:
         form = RegisterForm()
-
     return render(request, "authentication/register.html", {"form": form})
+
 
 
 def login_view(request):

@@ -346,48 +346,6 @@ input:focus, select:focus, textarea:focus {
 
 /*  Register */
 
-/* Annonce ajouter */
-
-.step { 
-    display: none; 
-    padding: 20px; 
-    border: 1px solid #ccc; 
-    border-radius: 8px; 
-    margin-bottom: 10px; 
-    background-color: #f9f9f9;
-}
-
-.step.active { display: block; }
-
-.step-indicator { 
-    margin-bottom: 10px; 
-    font-weight: bold; 
-    color: #333;
-}
-
-.btn { 
-    padding: 10px 20px; 
-    border: none; 
-    border-radius: 5px; 
-    cursor: pointer; 
-    margin: 5px; 
-    font-weight: bold;
-}
-
-.btn-next { background-color: #28a745; color: white; }
-.btn-prev { background-color: #007bff; color: white; }
-.btn-submit { background-color: #ffc107; color: white; }
-
-input, select, textarea { 
-    width: 100%; 
-    padding: 8px; 
-    margin-top: 5px; 
-    margin-bottom: 15px; 
-    border-radius: 5px; 
-    border: 1px solid #ccc; 
-    box-sizing: border-box;
-}
-
 
 /* --- Footer --- */
 .footer {
