@@ -246,6 +246,114 @@
 /* Publier annonce */
 
 
+/* ===== Structure globale ===== */
+.container {
+  max-width: 500px;
+  margin: 40px auto;
+  padding: 20px;
+}
+
+/* ===== Carte du formulaire ===== */
+.form-card {
+  background: #fff;
+  padding: 30px;
+  border-radius: 15px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+h2 {
+  text-align: center;
+  color: #333;
+  margin-bottom: 10px;
+}
+
+.subtitle {
+  text-align: center;
+  color: #777;
+  margin-bottom: 25px;
+}
+
+/* ===== Champs ===== */
+.input-group {
+  margin-bottom: 18px;
+}
+
+.input-group label {
+  display: block;
+  margin-bottom: 6px;
+  font-weight: 600;
+  color: #444;
+}
+
+.input-field,
+input[type="text"],
+input[type="number"],
+input[type="email"],
+textarea,
+select {
+  width: 100%;
+  padding: 12px;
+  border-radius: 10px;
+  border: 1px solid #ccc;
+  outline: none;
+  transition: 0.3s;
+  font-size: 14px;
+  background-color: #f9f9f9;
+}
+
+.input-field:focus,
+input:focus,
+select:focus,
+textarea:focus {
+  border-color: #00b09b;
+  box-shadow: 0 0 6px rgba(0, 176, 155, 0.4);
+  background-color: #fff;
+}
+
+/* ===== Bouton ===== */
+.btn {
+  width: 100%;
+  background-color: #00b09b;
+  color: white;
+  border: none;
+  padding: 12px;
+  border-radius: 10px;
+  cursor: pointer;
+  transition: background 0.3s;
+  font-weight: bold;
+  font-size: 15px;
+}
+
+.btn:hover {
+  background-color: #009685;
+}
+
+/* ===== Erreurs ===== */
+.error-text {
+  color: red;
+  font-size: 13px;
+  margin-top: 4px;
+}
+
+/* ===== Lien bas de page ===== */
+.footer-text {
+  text-align: center;
+  margin-top: 20px;
+  color: #555;
+}
+
+.footer-text a {
+  color: #00b09b;
+  text-decoration: none;
+  font-weight: 600;
+}
+
+.footer-text a:hover {
+  text-decoration: underline;
+}
+
+
+
 
 form {
     background: #fff;

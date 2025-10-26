@@ -4,10 +4,17 @@ from.forms import AnnonceForm
 from.models import Annonce, Categorie, SousCategorie
 from django.http import JsonResponse
 
+from django.contrib.auth.decorators import login_required
+from django.shortcuts import render, redirect
+from .forms import AnnonceForm
+from .models import SousCategorie
 
-@login_required
+@login_required(login_url='authentication:login')
 def creer_annonce(request):
-    if request.method == "POST":
+    categorie_id = request.POST.get('categorie')
+    sous_categories = SousCategorie.objects.filter(categorie_id=categorie_id) if categorie_id else SousCategorie.objects.none()
+
+    if request.method == "POST" and 'submit' in request.POST:
         form = AnnonceForm(request.POST, request.FILES)
         if form.is_valid():
             annonce = form.save(commit=False)
@@ -16,7 +23,12 @@ def creer_annonce(request):
             return redirect('home')
     else:
         form = AnnonceForm()
-    return render(request, "store/creer_annonce.html", {"form": form})
+
+    form.fields['sous_categorie'].queryset = sous_categories
+
+    return render(request, "store/creer_annonce.html", {
+        "form": form,
+    })
 
 def home(request):
     categories = Categorie.objects.all()

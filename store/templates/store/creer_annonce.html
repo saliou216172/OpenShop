@@ -12,18 +12,25 @@
             {% for field in form %}
                 <div class="input-group">
                     {{ field.label_tag }}
-                    {{ field }}
+                    {% if field.name == "categorie" %}
+                        <select name="categorie" class="input-field" onchange="this.form.submit()">
+                            <option value="">Sélectionne une catégorie</option>
+                            {% for cat in form.fields.categorie.queryset %}
+                                <option value="{{ cat.id }}" {% if cat.id|stringformat:"s" == request.POST.categorie %}selected{% endif %}>
+                                    {{ cat.nom }}
+                                </option>
+                            {% endfor %}
+                        </select>
+                    {% else %}
+                        {{ field }}
+                    {% endif %}
                     {% if field.errors %}
                         <p class="error-text">{{ field.errors|striptags }}</p>
                     {% endif %}
                 </div>
             {% endfor %}
-            <button type="submit" class="btn">Publier maintenant</button>
+            <button type="submit" name="submit" class="btn">Publier maintenant</button>
         </form>
-
-        <p class="footer-text">
-            <a href="{% url 'home' %}">Retour à l’accueil</a>
-        </p>
     </div>
 </div>
 
