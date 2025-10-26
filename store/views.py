@@ -8,6 +8,7 @@ from django.http import JsonResponse
 def creer_annonce(request):
     step = int(request.POST.get('step', 1))
 
+    # Si POST, créer le formulaire avec request.POST et request.FILES
     if request.method == 'POST':
         form = AnnonceForm(request.POST, request.FILES)
 
@@ -15,16 +16,14 @@ def creer_annonce(request):
         # Étape 1 : Suivant
         # --------------------------
         if step == 1 and 'next' in request.POST:
-            # rendre champs de l'étape 2 non requis temporairement
-            form.fields['prix'].required = False
-            form.fields['photo'].required = False
-            form.fields['telephone'].required = False
-            form.fields['email_contact'].required = False
+            # rendre les champs de l'étape 2 non requis temporairement
+            for field in ['prix', 'photo', 'telephone', 'email_contact']:
+                form.fields[field].required = False
 
             if form.is_valid():
-                step = 2  # passer à l'étape 2
+                step = 2
             else:
-                step = 1  # rester sur l'étape 1 si invalide
+                step = 1
 
         # --------------------------
         # Étape 2 : Précédent
@@ -36,13 +35,18 @@ def creer_annonce(request):
         # Étape 2 : Publier
         # --------------------------
         elif step == 2 and 'publish' in request.POST:
+            # rendre tous les champs non requis sauf ceux nécessaires
+            for field in ['prix', 'photo', 'telephone', 'email_contact']:
+                form.fields[field].required = False
+
             if form.is_valid():
                 annonce = form.save(commit=False)
                 annonce.auteur = request.user
-                # Vérifier que sous-catégorie correspond bien à la catégorie
+                # Vérifier que sous-catégorie correspond à la catégorie
                 if annonce.sous_categorie and annonce.sous_categorie.categorie != annonce.categorie:
                     form.add_error('sous_categorie', 'La sous-catégorie ne correspond pas à la catégorie sélectionnée.')
                 else:
+                    # Sauvegarder l'annonce même si photo est vide
                     annonce.save()
                     return redirect('home')
     else:
