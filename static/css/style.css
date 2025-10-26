@@ -345,23 +345,90 @@ input:focus, select:focus, textarea:focus {
 }
 
 /*  Register */
+/* Container général */
+.container {
+    max-width: 500px;
+    margin: 50px auto;
+    padding: 20px;
+}
 
+/* Carte du formulaire */
+.form-card {
+    background-color: #fff;
+    border-radius: 10px;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+    padding: 30px;
+    font-family: Arial, sans-serif;
+}
+
+/* Titres et sous-titres */
+.form-card h2 {
+    margin-bottom: 10px;
+    text-align: center;
+    color: #333;
+}
+
+.form-card .subtitle {
+    text-align: center;
+    margin-bottom: 20px;
+    color: #666;
+}
+
+/* Champs du formulaire */
+.input-group {
+    margin-bottom: 15px;
+}
+
+.input-group label {
+    display: block;
+    margin-bottom: 5px;
+    font-weight: bold;
+}
+
+.input-group input {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+}
+
+/* Boutons */
+.btn {
+    background-color: #4CAF50;
+    color: white;
+    padding: 10px 20px;
+    margin: 5px 2px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.btn:hover {
+    background-color: #45a049;
+}
+
+/* Masquer les étapes non actives */
 .form-step {
     display: none;
 }
+
 .form-step.active {
     display: block;
 }
 
+/* Step controls */
 .step-controls {
-    display: flex;
-    justify-content: space-between;
+    text-align: center;
     margin-top: 20px;
 }
 
-.hidden {
-    display: none;
+/* Texte de bas de page */
+.footer-text {
+    text-align: center;
+    margin-top: 20px;
+    color: #666;
 }
+
 
 
 /* Annonce ajouter */
