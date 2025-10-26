@@ -407,15 +407,6 @@ input:focus, select:focus, textarea:focus {
     background-color: #45a049;
 }
 
-/* Masquer les étapes non actives */
-.form-step {
-    display: none;
-}
-
-.form-step.active {
-    display: block;
-}
-
 /* Step controls */
 .step-controls {
     text-align: center;
@@ -428,7 +419,6 @@ input:focus, select:focus, textarea:focus {
     margin-top: 20px;
     color: #666;
 }
-
 
 
 /* Annonce ajouter */
