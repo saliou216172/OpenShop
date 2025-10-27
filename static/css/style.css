@@ -182,32 +182,30 @@
 }
 
 /* categories et sous categories */
-
-/* === Global container === */
-.container {
-    width: 95%;
+/* Conteneur principal */
+.annonces-container {
+    width: 90%;
     max-width: 1200px;
-    margin: 20px auto;
-    font-family: 'Poppins', sans-serif;
+    margin: 30px auto;
+    font-family: "Poppins", sans-serif;
 }
 
-h2 {
-    text-align: center;
-    margin-bottom: 20px;
-    color: #333;
+/* Titre de catégorie */
+.categorie-titre {
+    font-size: 1.8rem;
+    margin-bottom: 15px;
+    color: #222;
 }
 
-/* === Sous-catégories horizontales === */
+/* Sous-catégories horizontales */
 .sous-categories-container {
     display: flex;
     overflow-x: auto;
     gap: 10px;
     padding: 10px 0;
-    scrollbar-width: thin;
-    scrollbar-color: #ccc transparent;
     margin-bottom: 25px;
+    scrollbar-width: thin;
 }
-
 .sous-categories-container::-webkit-scrollbar {
     height: 6px;
 }
@@ -215,145 +213,116 @@ h2 {
     background-color: #ccc;
     border-radius: 10px;
 }
-
 .sous-categorie-btn {
-    flex-shrink: 0;
-    background: #f5f5f5;
-    padding: 8px 18px;
-    border-radius: 25px;
+    flex: 0 0 auto;
+    background: #f0f0f0;
+    padding: 10px 18px;
+    border-radius: 20px;
     color: #333;
-    font-size: 0.95rem;
     font-weight: 500;
-    border: 1px solid #ddd;
     text-decoration: none;
-    transition: all 0.3s ease;
+    transition: 0.3s;
 }
-
 .sous-categorie-btn:hover {
-    background-color: #007bff;
+    background: #007bff;
     color: white;
-    border-color: #007bff;
 }
 
-/* === Grid des annonces === */
+/* Grille d'annonces */
 .annonces-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+    grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
     gap: 20px;
 }
 
-/* === Carte annonce === */
+/* Carte d’annonce */
 .annonce-card {
-    background: #fff;
-    border: 1px solid #eee;
-    border-radius: 12px;
+    background: white;
+    border-radius: 10px;
+    box-shadow: 0 3px 8px rgba(0,0,0,0.1);
     overflow: hidden;
-    box-shadow: 0 2px 6px rgba(0,0,0,0.05);
-    transition: transform 0.2s ease, box-shadow 0.3s ease;
-}
-
-.annonce-card:hover {
-    transform: translateY(-4px);
-    box-shadow: 0 5px 15px rgba(0,0,0,0.1);
-}
-
-/* === Image === */
-.annonce-image {
-    width: 100%;
-    height: 180px;
-    background: #f0f0f0;
     display: flex;
-    justify-content: center;
-    align-items: center;
+    flex-direction: column;
+    transition: transform 0.2s;
+}
+.annonce-card:hover {
+    transform: translateY(-5px);
 }
 
-.annonce-image img {
+/* Image */
+.annonce-image img, .placeholder-image {
     width: 100%;
-    height: 100%;
+    height: 200px;
     object-fit: cover;
+    background: #f5f5f5;
 }
-
 .placeholder-image {
-    color: #888;
-    font-size: 0.9rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #777;
+    font-size: 1rem;
 }
 
-/* === Contenu === */
+/* Contenu */
 .annonce-content {
     padding: 15px;
 }
-
-.annonce-content h3 {
-    font-size: 1.1rem;
+.annonce-titre {
+    font-size: 1.2rem;
     color: #333;
     margin-bottom: 8px;
 }
-
-.description {
+.annonce-description {
+    color: #555;
     font-size: 0.9rem;
-    color: #666;
     margin-bottom: 10px;
 }
-
-.prix {
-    color: #111;
-    font-weight: 600;
+.annonce-prix {
+    color: #007bff;
+    font-weight: bold;
     margin-bottom: 12px;
 }
 
-/* === Contact === */
+/* Boutons contact */
 .contact {
     display: flex;
-    flex-wrap: wrap;
-    gap: 8px;
+    gap: 10px;
+    align-items: center;
 }
-
 .whatsapp-btn, .email-btn {
     display: flex;
     align-items: center;
     gap: 6px;
-    text-decoration: none;
-    padding: 8px 12px;
-    border-radius: 8px;
-    font-size: 0.9rem;
+    padding: 8px 14px;
+    border-radius: 6px;
     font-weight: 500;
-    transition: background 0.3s ease;
+    text-decoration: none;
+    transition: 0.3s;
 }
-
 .whatsapp-btn {
-    background-color: #25D366;
+    background: #25D366;
     color: white;
 }
-
-.whatsapp-btn img {
+.whatsapp-btn:hover {
+    background: #1ebe5b;
+}
+.whatsapp-icon {
     width: 18px;
     height: 18px;
 }
-
-.whatsapp-btn:hover {
-    background-color: #1ebe5d;
-}
-
 .email-btn {
-    background-color: #007bff;
+    background: #007bff;
     color: white;
 }
-
 .email-btn:hover {
-    background-color: #005ecb;
+    background: #0069d9;
 }
 
-/* === Responsive === */
-@media (max-width: 768px) {
-    .annonce-image {
-        height: 150px;
-    }
-    .annonce-content h3 {
-        font-size: 1rem;
-    }
-    .sous-categorie-btn {
-        font-size: 0.85rem;
-        padding: 6px 14px;
+/* Responsive */
+@media (max-width: 600px) {
+    .annonce-image img, .placeholder-image {
+        height: 160px;
     }
 }
 
