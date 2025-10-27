@@ -8,33 +8,76 @@
 
     <form method="POST" enctype="multipart/form-data" id="annonceForm">
         {% csrf_token %}
+
+        <!-- Catégorie -->
         <div class="input-group">
             <label for="categorie">Catégorie</label>
             <select id="categorie" name="categorie" required>
-                <option value="">Sélectionne une catégorie</option>
+                <option value="">-- Sélectionne une catégorie --</option>
                 {% for cat in categories %}
                     <option value="{{ cat.id }}">{{ cat.nom }}</option>
                 {% endfor %}
             </select>
         </div>
 
+        <!-- Sous-catégorie -->
         <div class="input-group">
             <label for="sous_categorie">Sous-catégorie</label>
             <select id="sous_categorie" name="sous_categorie" required>
-                <option value="">Sélectionne d’abord une catégorie</option>
+                <option value="">-- Sélectionne d’abord une catégorie --</option>
             </select>
         </div>
 
-        {{ form.titre.label_tag }} {{ form.titre }}
-        {{ form.description.label_tag }} {{ form.description }}
-        {{ form.photo.label_tag }} {{ form.photo }}
-        {{ form.prix.label_tag }} {{ form.prix }}
-        {{ form.telephone.label_tag }} {{ form.telephone }}
-        {{ form.email_contact.label_tag }} {{ form.email_contact }}
+        <!-- Champs du formulaire Django -->
+        <div class="input-group">
+            {{ form.titre.label_tag }} {{ form.titre }}
+            {% if form.titre.errors %}
+                <p class="error-text">{{ form.titre.errors|striptags }}</p>
+            {% endif %}
+        </div>
+
+        <div class="input-group">
+            {{ form.description.label_tag }} {{ form.description }}
+            {% if form.description.errors %}
+                <p class="error-text">{{ form.description.errors|striptags }}</p>
+            {% endif %}
+        </div>
+
+        <div class="input-group">
+            {{ form.photo.label_tag }} {{ form.photo }}
+            {% if form.photo.errors %}
+                <p class="error-text">{{ form.photo.errors|striptags }}</p>
+            {% endif %}
+        </div>
+
+        <div class="input-group">
+            {{ form.prix.label_tag }} {{ form.prix }}
+            {% if form.prix.errors %}
+                <p class="error-text">{{ form.prix.errors|striptags }}</p>
+            {% endif %}
+        </div>
+
+        <div class="input-group">
+            {{ form.telephone.label_tag }} {{ form.telephone }}
+            {% if form.telephone.errors %}
+                <p class="error-text">{{ form.telephone.errors|striptags }}</p>
+            {% endif %}
+        </div>
+
+        <div class="input-group">
+            {{ form.email_contact.label_tag }} {{ form.email_contact }}
+            {% if form.email_contact.errors %}
+                <p class="error-text">{{ form.email_contact.errors|striptags }}</p>
+            {% endif %}
+        </div>
 
         <button type="submit" class="btn">Publier maintenant</button>
     </form>
 </div>
 
-<script src="{% static 'js/ajouterAnnonce.js' %}"></script>
+<!-- JS pour charger dynamiquement les sous-catégories -->
+<script src="{% static 'js/ajouterAnnonce.js' %}">
+
+</script>
+
 {% endblock %}

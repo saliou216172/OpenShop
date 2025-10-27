@@ -47,8 +47,11 @@ def annonces_par_souscategorie(request, souscategorie_id):
     })
 
 
-# 🔥 Vue AJAX (avec paramètre dans l’URL)
-def get_sous_categories(request, categorie_id):
+def get_sous_categories(request):
+    categorie_id = request.GET.get('categorie_id')
+    if not categorie_id:
+        return JsonResponse([], safe=False)
+
     sous_categories = SousCategorie.objects.filter(categorie_id=categorie_id)
     data = [{'id': sc.id, 'nom': sc.nom} for sc in sous_categories]
     return JsonResponse(data, safe=False)
