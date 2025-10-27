@@ -1,58 +1,53 @@
 {% extends 'base.html' %}
-{% block content %}
 {% load static %}
- 
+{% block content %}
 
-<div class="container mt-4">
-    <h2 class="mb-4 text-center">Annonces - {{ categorie }}</h2>
+<div class="container">
+    <h2>Annonces dans la catégorie : {{ categorie.nom }}</h2>
 
-    <h1>Sous-catégories pour {{ categorie.nom }}</h1>
-    <div class="souscategories-container">
-        {% for sous in sous_categories %}
-            <a href="{% url 'annonces_par_souscategorie' sous.id %}" class="souscategorie-card">
-                {{ sous.nom }}
+    <!-- Conteneur des sous-catégories -->
+    <div class="sous-categories-container">
+        {% for sc in sous_categories %}
+            <a href="{% url 'annonces_par_souscategorie' sc.id %}" class="sous-categorie-btn">
+                {{ sc.nom }}
             </a>
         {% endfor %}
     </div>
 
-    <div class="row">
+    <!-- Grid annonces -->
+    <div class="annonces-grid">
         {% for annonce in annonces %}
-        <div class="col-md-4 col-sm-6 mb-4">
-            <div class="card shadow-sm h-100">
+        <div class="annonce-card">
+            <!-- Image ou placeholder -->
+            <div class="annonce-image">
                 {% if annonce.photo %}
-                        <img src="{{ annonce.photo.url }}" class="card-img-top annonce-img" alt="{{ annonce.titre }}">
+                    <img src="{{ annonce.photo.url }}" alt="{{ annonce.titre }}">
                 {% else %}
-                    {% if annonce.categorie == "immobilier" %}
-                        <img src="{% static 'images/no-house.jpg' %}" class="card-img-top annonce-img" alt="Pas de photo">
-                    {% elif annonce.categorie == "vehicules" %}
-                        <img src="{% static 'images/no-car.jpg' %}" class="card-img-top annonce-img" alt="Pas de photo">
-                    {% elif annonce.categorie == "modes" %}
-                        <img src="{% static 'images/no-clothes.jpg' %}" class="card-img-top annonce-img" alt="Pas de photo">
-                    {% elif annonce.categorie == "electroniques" %}
-                        <img src="{% static 'images/no-electro.jpg' %}" class="card-img-top annonce-img" alt="Pas de photo">
-                   {% else %}
-                        <img src="{% static 'images/no-image.jpg' %}" class="card-img-top annonce-img" alt="Pas de photo">   
-                   {% endif %}
-                {% endif %}     
+                    <div class="placeholder-image">Pas d'image</div>
+                {% endif %}
+            </div>
 
-                <div class="card-body">
-                    <h5 class="card-title">{{ annonce.titre }}</h5>
-                    <p class="card-text">{{ annonce.description|truncatechars:100 }}</p>   
-                    {% if annonce.prix %}
-                    <p class="text-success fw-bold">{{ annonce.prix }} GNF</p>      
-                    {% endif %}  
-                    {% if annonce.telephone and annonce.whatsapp %} 
-                        <div class="bloc-wa">
-                         
-                            <a href="https://wa.me/annonce.telephone" target="_blank">whatsapp</a>
-                        </div>
-                       
+            <!-- Contenu -->
+            <div class="annonce-content">
+                <h3>{{ annonce.titre }}</h3>
+                <p class="description">{{ annonce.description|truncatewords:20 }}</p>
+                <p class="prix">Prix : <strong>{{ annonce.prix }} GNF</strong></p>
+
+                <div class="contact">
+                    {% if annonce.telephone %}
+                        <a href="https://wa.me/{{ annonce.telephone }}" target="_blank" class="whatsapp-btn">
+                            <img src="{% static 'images/whatsapp-icon.png' %}" alt="WhatsApp">
+                            WhatsApp
+                        </a>
+                    {% endif %}
+                    {% if annonce.email_contact %}
+                        <a href="mailto:{{ annonce.email_contact }}" class="email-btn">Email</a>
                     {% endif %}
                 </div>
             </div>
         </div>
         {% empty %}
-        <p>Aucune annonce trouvée pour cette catégorie.</p>
+            <p>Aucune annonce disponible dans cette catégorie pour le moment.</p>
         {% endfor %}
     </div>
 </div>
