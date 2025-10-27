@@ -28,56 +28,52 @@
             </select>
         </div>
 
-        <!-- Champs du formulaire Django -->
-        <div class="input-group">
-            {{ form.titre.label_tag }} {{ form.titre }}
-            {% if form.titre.errors %}
-                <p class="error-text">{{ form.titre.errors|striptags }}</p>
-            {% endif %}
-        </div>
-
-        <div class="input-group">
-            {{ form.description.label_tag }} {{ form.description }}
-            {% if form.description.errors %}
-                <p class="error-text">{{ form.description.errors|striptags }}</p>
-            {% endif %}
-        </div>
-
-        <div class="input-group">
-            {{ form.photo.label_tag }} {{ form.photo }}
-            {% if form.photo.errors %}
-                <p class="error-text">{{ form.photo.errors|striptags }}</p>
-            {% endif %}
-        </div>
-
-        <div class="input-group">
-            {{ form.prix.label_tag }} {{ form.prix }}
-            {% if form.prix.errors %}
-                <p class="error-text">{{ form.prix.errors|striptags }}</p>
-            {% endif %}
-        </div>
-
-        <div class="input-group">
-            {{ form.telephone.label_tag }} {{ form.telephone }}
-            {% if form.telephone.errors %}
-                <p class="error-text">{{ form.telephone.errors|striptags }}</p>
-            {% endif %}
-        </div>
-
-        <div class="input-group">
-            {{ form.email_contact.label_tag }} {{ form.email_contact }}
-            {% if form.email_contact.errors %}
-                <p class="error-text">{{ form.email_contact.errors|striptags }}</p>
-            {% endif %}
-        </div>
+        {{ form.titre.label_tag }} {{ form.titre }}
+        {{ form.description.label_tag }} {{ form.description }}
+        {{ form.photo.label_tag }} {{ form.photo }}
+        {{ form.prix.label_tag }} {{ form.prix }}
+        {{ form.telephone.label_tag }} {{ form.telephone }}
+        {{ form.email_contact.label_tag }} {{ form.email_contact }}
 
         <button type="submit" class="btn">Publier maintenant</button>
     </form>
 </div>
 
-<!-- JS pour charger dynamiquement les sous-catégories -->
-<script src="{% static 'js/ajouterAnnonce.js' %}">
+<script>
+document.addEventListener("DOMContentLoaded", () => {
+    const categorieSelect = document.getElementById('categorie');
+    const sousCategorieSelect = document.getElementById('sous_categorie');
 
+    categorieSelect.addEventListener('change', function () {
+        const categorieId = this.value;
+
+        sousCategorieSelect.innerHTML = '<option>Chargement...</option>';
+
+        if (!categorieId) {
+            sousCategorieSelect.innerHTML = '<option value="">-- Sélectionne d’abord une catégorie --</option>';
+            return;
+        }
+
+        fetch(`/store/get_sous_categories/?categorie_id=${categorieId}`)
+            .then(response => {
+                if (!response.ok) throw new Error('Network response was not ok');
+                return response.json();
+            })
+            .then(data => {
+                sousCategorieSelect.innerHTML = '<option value="">-- Sélectionne une sous-catégorie --</option>';
+                data.forEach(sc => {
+                    const option = document.createElement('option');
+                    option.value = sc.id;
+                    option.textContent = sc.nom;
+                    sousCategorieSelect.appendChild(option);
+                });
+            })
+            .catch(err => {
+                console.error(err);
+                sousCategorieSelect.innerHTML = '<option value="">Erreur de chargement</option>';
+            });
+    });
+});
 </script>
 
 {% endblock %}
