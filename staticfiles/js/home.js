@@ -12,5 +12,5 @@
 
   // Démarre l'animation
   showNextCard();
-  setInterval(showNextCard, 2000); // change toutes les 2 secondes
+  setInterval(showNextCard, 5000); // change toutes les 2 secondes
 
