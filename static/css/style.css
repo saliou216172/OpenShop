@@ -123,6 +123,60 @@
 
 /* CATEGRIES dans home */
 
+/* === CONTENEUR DES CATÉGORIES === */
+.categories-container {
+    display: flex;
+    flex-wrap: nowrap;               /* pas de retour à la ligne */
+    overflow-x: auto;                /* défilement horizontal si trop d'éléments */
+    gap: 10px;                       /* petit espace entre les cartes */
+    padding: 10px 0;
+    scrollbar-width: none;           /* masque la barre sur Firefox */
+}
+
+.categories-container::-webkit-scrollbar {
+    display: none;                   /* masque la barre sur Chrome/Safari */
+}
+
+/* === STYLE DES CARTES === */
+.categorie-card {
+    flex: 0 0 auto;                  /* empêche la réduction automatique */
+    background-color: #ffffff;
+    color: #333;
+    text-align: center;
+    text-decoration: none;
+    padding: 8px 14px;
+    border-radius: 12px;
+    font-size: 14px;
+    font-weight: 500;
+    box-shadow: 0 2px 6px rgba(0,0,0,0.08);
+    border: 1px solid #eee;
+    transition: all 0.25s ease-in-out;
+    white-space: nowrap;             /* empêche le texte de passer à la ligne */
+}
+
+/* === AU SURVOL === */
+.categorie-card:hover {
+    background-color: #f6f6f6;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 10px rgba(0,0,0,0.12);
+}
+
+/* === VERSION MOBILE === */
+@media (max-width: 600px) {
+    .categorie-card {
+        font-size: 13px;
+        padding: 7px 10px;
+        border-radius: 10px;
+    }
+}
+
+/* === VERSION TABLETTE === */
+@media (min-width: 601px) and (max-width: 1024px) {
+    .categorie-card {
+        font-size: 14px;
+        padding: 8px 12px;
+    }
+}
 
 
 /* Partie temporaire */
