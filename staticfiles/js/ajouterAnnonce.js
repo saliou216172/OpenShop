@@ -1,3 +1,6 @@
+
+const sousCategorieUrl = "{% url 'get_sous_categories' %}";
+
 document.addEventListener("DOMContentLoaded", () => {
     const categorieSelect = document.getElementById('categorie');
     const sousCategorieSelect = document.getElementById('sous_categorie');
@@ -5,7 +8,6 @@ document.addEventListener("DOMContentLoaded", () => {
     categorieSelect.addEventListener('change', function () {
         const categorieId = this.value;
 
-        // Message de chargement
         sousCategorieSelect.innerHTML = '<option>Chargement...</option>';
 
         if (!categorieId) {
@@ -13,8 +15,11 @@ document.addEventListener("DOMContentLoaded", () => {
             return;
         }
 
-        fetch(`/store/get_sous_categories/?categorie_id=${categorieId}`)
-            .then(response => response.json())
+        fetch(`${sousCategorieUrl}?categorie_id=${categorieId}`)
+            .then(response => {
+                if (!response.ok) throw new Error('Network response was not ok');
+                return response.json();
+            })
             .then(data => {
                 sousCategorieSelect.innerHTML = '<option value="">-- Sélectionne une sous-catégorie --</option>';
                 data.forEach(sc => {
@@ -24,8 +29,10 @@ document.addEventListener("DOMContentLoaded", () => {
                     sousCategorieSelect.appendChild(option);
                 });
             })
-            .catch(() => {
+            .catch(err => {
+                console.error(err);
                 sousCategorieSelect.innerHTML = '<option value="">Erreur de chargement</option>';
             });
     });
 });
+

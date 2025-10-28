@@ -14,27 +14,26 @@
   <div class="container">
     <h4>C'est le moment de vendre !</h4>
     <a href="{% url 'creer_annonce' %}" class="btn-deposer">
-           <i class="fa fa-plus-circle"></i> Déposer une annonce
+          <i class="fa fa-plus-circle"></i> Déposer une annonce
     </a>
 
   </div>
 </section>
 
 
-<!-- Section d'information temporaire -->
 <section class="info-section">
   <div class="container">
     <h2>Pourquoi choisir notre plateforme ?</h2>
     <div class="info-cards">
-      <div class="card">
+      <div class="card"> <!-- carte 1 -->
         <h3>Simple à utiliser</h3>
         <p>Publiez votre annonce en quelques clics, sans inscription compliquée.</p>
       </div>
-      <div class="card">
+      <div class="card"> <!-- carte 2 -->
         <h3>Gratuit et rapide</h3>
         <p>Déposez vos annonces gratuitement et touchez vos clients en un rien de temps.</p>
       </div>
-      <div class="card">
+      <div class="card"> <!-- carte 3 -->
         <h3>Fiable et sécurisé</h3>
         <p>Notre plateforme vérifie chaque annonce pour garantir la qualité et la sécurité.</p>
       </div>
@@ -42,6 +41,6 @@
   </div>
 </section>
 
-
+<script src="{% static 'js/home.js'%}"></script>
 
 {% endblock %}

@@ -32,9 +32,14 @@ def home(request):
 def annonces_par_categorie(request, categorie_id):
     categorie = get_object_or_404(Categorie, id=categorie_id)
     sous_categories = categorie.sous_categories.all()
+
+    # récupère toutes les annonces dont la sous-catégorie est dans cette catégorie
+    annonces = Annonce.objects.filter(sous_categorie__categorie=categorie)
+
     return render(request, 'store/annonces.html', {
         'categorie': categorie,
-        'sous_categories': sous_categories
+        'sous_categories': sous_categories,
+        'annonces': annonces
     })
 
 

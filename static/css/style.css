@@ -409,72 +409,44 @@
 
 /* Partie temporaire */
 
-/* ===== SECTION INFO TEMPORAIRE ===== */
-.info-section {
-  padding: 80px 20px;
-  background: linear-gradient(to right, #fff8f0, #ffffff);
-  text-align: center;
+ .info-section {
+    padding: 50px 0;
+    background-color: #fff8f2;
+    text-align: center;
 }
 
 .info-section h2 {
-  font-size: 2rem;
-  font-weight: 700;
-  color: #333;
-  margin-bottom: 50px;
-  position: relative;
-}
-
-.info-section h2::after {
-  content: "";
-  width: 80px;
-  height: 4px;
-  background-color: #ff6f00;
-  display: block;
-  margin: 12px auto 0;
-  border-radius: 4px;
+    font-size: 28px;
+    margin-bottom: 30px;
+    color: #333;
 }
 
 .info-cards {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-  gap: 30px;
+    position: relative;
+    width: 100%;
+    max-width: 900px;  /* largeur maximale sur PC */
+    margin: 0 auto;
+    overflow: hidden;   /* empêche le scroll horizontal */
+    height: 180px;      /* fixe la hauteur pour toutes les cartes */
 }
 
 .card {
-  background: #fff;
-  padding: 30px 20px;
-  border-radius: 16px;
-  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.05);
-  transition: all 0.3s ease;
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    opacity: 0;
+    transition: opacity 0.5s ease-in-out;
+    padding: 20px;
+    background-color: #ffedd8;
+    border-radius: 10px;
+    box-shadow: 0 3px 10px rgba(0,0,0,0.1);
 }
 
-.card:hover {
-  transform: translateY(-6px);
-  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.1);
+.card.active {
+    opacity: 1;
 }
 
-.card h3 {
-  font-size: 1.3rem;
-  color: #ff6f00;
-  margin-bottom: 15px;
-}
-
-.card p {
-  color: #555;
-  line-height: 1.6;
-}
-
-/* Animation subtile des cartes */
-@keyframes float {
-  0% { transform: translateY(0); }
-  50% { transform: translateY(-5px); }
-  100% { transform: translateY(0); }
-}
-
-.card {
-  animation: float 5s ease-in-out infinite;
-}
- 
 /* Fin parite temporaire */
 
 
