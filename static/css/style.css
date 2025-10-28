@@ -73,51 +73,74 @@
   }
 }
 
-/* Gangnez en visibilité */
-
+/* DEPOSEZ ANNONCES DANS HOME */
+ 
+/* === SECTION DÉPOSER UNE ANNONCE === */
 .deposer-annonce {
-  background: linear-gradient(to right, #fff8f0, #fefefe);
-  border-radius: 16px;
-  padding: 60px 20px;
-  text-align: center;
-  margin: 40px auto;
-  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.05);
-  transition: all 0.3s ease;
+    background: linear-gradient(90deg, #fff6f0 0%, #fff0e0 100%); /* fond légèrement orangé */
+    border-top: 1px solid #ffe0c2;
+    border-bottom: 1px solid #ffd7a3;
+    padding: 15px 0;                  /* peu de hauteur */
+    margin-top: 20px;
 }
 
-.deposer-annonce:hover {
-  transform: translateY(-4px);
-  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.08);
+.deposer-annonce .container {
+    max-width: 1100px;
+    margin: 0 auto;
+    padding: 0 15px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;                  /* pour adapter sur mobile */
 }
 
-.deposer-annonce h2 {
-  color: #333;
-  font-size: 2rem;
-  margin-bottom: 10px;
-  font-weight: 600;
+/* === TITRE === */
+.deposer-annonce h4 {
+    font-size: 18px;
+    color: #333;
+    font-weight: 600;
+    margin: 0;
 }
 
-.deposer-annonce p {
-  color: #555;
-  font-size: 1.1rem;
-  margin-bottom: 25px;
-}
-
+/* === BOUTON === */
 .btn-deposer {
-  display: inline-block;
-  background-color: #ff6f00;
-  color: white;
-  padding: 14px 32px;
-  font-size: 1rem;
-  border-radius: 30px;
-  text-decoration: none;
-  font-weight: 600;
-  transition: background-color 0.3s ease, transform 0.3s ease;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    background-color: #ff7f00;       /* orange Leboncoin */
+    color: white;
+    font-weight: 600;
+    text-decoration: none;
+    border-radius: 8px;
+    padding: 10px 16px;
+    transition: all 0.25s ease-in-out;
+    font-size: 14px;
+    box-shadow: 0 2px 6px rgba(0,0,0,0.1);
 }
 
 .btn-deposer:hover {
-  background-color: #ff8f00;
-  transform: scale(1.05);
+    background-color: #e86f00;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 10px rgba(0,0,0,0.15);
+}
+
+/* === ICÔNE === */
+.btn-deposer i {
+    font-size: 16px;
+}
+
+/* === RESPONSIVE MOBILE === */
+@media (max-width: 600px) {
+    .deposer-annonce .container {
+        flex-direction: column;
+        text-align: center;
+        gap: 10px;
+    }
+
+    .btn-deposer {
+        width: 100%;
+        justify-content: center;
+    }
 }
 
 

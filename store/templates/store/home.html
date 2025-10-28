@@ -2,17 +2,6 @@
 {% block content %}
 {% load static %}
 
-<section class="deposer-annonce">
-  <div class="container">
-    <h2>Gagnez en visibilité !</h2>
-    <p>Publiez vos annonces gratuitement et trouvez rapidement vos clients.</p>
-    <a href="{% url 'creer_annonce' %}" class="btn-deposer">
-           <i class="fa fa-plus-circle"></i> Déposer une annonce
-    </a>
-
-  </div>
-</section>
-
 <div class="categories-container">
     {% for categorie in categories %}
         <a href="{% url 'annonces_par_categorie' categorie.id %}" class="categorie-card">
@@ -20,6 +9,16 @@
         </a>
     {% endfor %}
 </div>
+
+<section class="deposer-annonce">
+  <div class="container">
+    <h4>C'est le moment de vendre !</h4>
+    <a href="{% url 'creer_annonce' %}" class="btn-deposer">
+           <i class="fa fa-plus-circle"></i> Déposer une annonce
+    </a>
+
+  </div>
+</section>
 
 
 <!-- Section d'information temporaire -->
