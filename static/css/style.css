@@ -210,99 +210,97 @@
 
 /*    IMAGES TEMPORAIRES  */
 
-
-/* Section principale */
-.highlighted-section {
-  padding: 50px 20px;
-  background: #f9f9f9;
-  text-align: center;
+/* --- Section principale --- */
+.featured-categories {
+  width: 100%;
+  padding: 30px 0;
+  background: transparent; /* invisible, fusionne avec le fond */
 }
 
-.highlighted-section h2 {
-  font-size: 2rem;
-  margin-bottom: 30px;
-  color: #111;
-  font-weight: 700;
-  letter-spacing: 0.5px;
-}
-
-/* Conteneur des cartes */
-.highlighted-container {
+/* --- Conteneur horizontal --- */
+.featured-track {
   display: flex;
-  gap: 25px;
+  gap: 18px;
+  overflow-x: auto;
+  scroll-behavior: smooth;
+  padding: 0 15px;
   justify-content: center;
-  flex-wrap: wrap;
 }
 
-/* Style des cartes */
-.highlighted-card {
+/* Cacher la scrollbar */
+.featured-track::-webkit-scrollbar {
+  display: none;
+}
+.featured-track {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+
+/* --- Élément individuel --- */
+.featured-item {
   position: relative;
-  width: 260px;
-  height: 180px;
-  border-radius: 18px;
-  overflow: hidden;
   flex: 0 0 auto;
-  cursor: pointer;
+  width: 250px;
+  height: 160px;
+  border-radius: 16px;
+  overflow: hidden;
   text-decoration: none;
-  box-shadow: 0 10px 25px rgba(0,0,0,0.15);
+  color: #fff;
+  cursor: pointer;
+  box-shadow: 0 6px 18px rgba(0, 0, 0, 0.15);
   transition: transform 0.4s ease, box-shadow 0.4s ease;
 }
 
-.highlighted-card img {
+.featured-item img {
   width: 100%;
   height: 100%;
   object-fit: cover;
-  transition: transform 0.6s ease;
+  transition: transform 0.5s ease;
 }
 
-.highlighted-card:hover img {
-  transform: scale(1.08);
+.featured-item:hover img {
+  transform: scale(1.05);
 }
 
-.highlighted-card:hover {
-  transform: translateY(-6px);
-  box-shadow: 0 15px 35px rgba(0,0,0,0.2);
+.featured-item:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.25);
 }
 
-/* Texte sur les images */
-.highlighted-overlay {
+/* --- Titre en bas de l'image --- */
+.featured-title {
   position: absolute;
   bottom: 0;
+  left: 0;
   width: 100%;
-  background: linear-gradient(to top, rgba(0,0,0,0.7), transparent);
-  color: #fff;
-  padding: 15px;
-  text-align: left;
-}
-
-.highlighted-overlay h3 {
-  margin: 0;
-  font-size: 1.1rem;
+  background: linear-gradient(to top, rgba(0,0,0,0.6), transparent);
+  text-align: center;
   font-weight: 600;
+  font-size: 1.1rem;
+  padding: 10px 0;
 }
 
 /* --- Mode mobile --- */
 @media (max-width: 768px) {
-  .highlighted-container {
-    flex-wrap: nowrap;
-    overflow-x: auto;
-    scroll-behavior: smooth;
+  .featured-track {
     justify-content: flex-start;
     padding-left: 10px;
   }
 
-  /* Cacher la scrollbar proprement */
-  .highlighted-container::-webkit-scrollbar {
-    display: none;
+  .featured-item {
+    width: 70%;
+    min-width: 70%;
   }
-  .highlighted-container {
-    -ms-overflow-style: none; /* IE, Edge */
-    scrollbar-width: none; /* Firefox */
+}
+
+/* Effet : voir un bout de la 3e image */
+@media (max-width: 768px) {
+  .featured-track {
+    scroll-snap-type: x mandatory;
   }
 
-  .highlighted-card {
-    min-width: 70%;
-    flex: 0 0 auto;
+  .featured-item {
+    scroll-snap-align: start;
   }
 }
 
