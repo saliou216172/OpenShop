@@ -306,201 +306,184 @@
 
 
 /*    Annonces.html  */
- 
-/* === CONTENEUR GLOBAL === */
-.annonces-container {
-    max-width: 1200px;
-    margin: 0 auto;
-    padding: 15px;
-    background-color: #fafafa;
+.annonces-images {
+  margin: 30px 0;
+  background-color: transparent; /* pas de couleur de conteneur visible */
 }
 
-/* === TITRE DE LA CATÉGORIE === */
-.categorie-titre {
-    font-size: 20px;
-    font-weight: 600;
-    color: #333;
-    margin-bottom: 10px;
-    text-align: center;
+.annonces-images h3 {
+  margin-bottom: 15px;
+  font-size: 1.4rem;
+  text-align: center;
+  color: #333;
 }
 
-/* === SOUS-CATÉGORIES (petits boutons horizontaux) === */
-.sous-categories-container {
-    display: flex;
-    overflow-x: auto;
-    gap: 10px;
-    padding: 10px 0;
-    scrollbar-width: none;
-    -webkit-overflow-scrolling: touch;
+.images-container {
+  display: flex;
+  flex-wrap: wrap; /* permet de passer à la ligne sur PC */
+  gap: 15px;
+  justify-content: center;
+  overflow-x: auto; /* permet de défiler horizontalement sur mobile */
+  scrollbar-width: none; /* supprime la barre de défilement */
 }
 
-.sous-categories-container::-webkit-scrollbar {
-    display: none;
+.images-container::-webkit-scrollbar {
+  display: none; /* supprime la barre de défilement sur Chrome/Safari */
 }
 
-.sous-categorie-btn {
-    flex: 0 0 auto;
-    background-color: #fff;
-    border: 1px solid #ddd;
-    border-radius: 30px;
-    padding: 8px 16px;
-    font-size: 14px;
-    color: #333;
-    text-decoration: none;
-    transition: all 0.25s ease-in-out;
-    white-space: nowrap;
+.image-card {
+  position: relative;
+  flex: 1 0 200px; /* largeur fixe sur grand écran */
+  max-width: 250px;
+  border-radius: 10px;
+  overflow: hidden;
+  text-decoration: none;
+  transition: transform 0.3s ease;
 }
 
-.sous-categorie-btn:hover {
-    background-color: #f6f6f6;
-    border-color: #ccc;
+.image-card:hover {
+  transform: scale(1.03);
 }
 
-/* === GRILLE DES ANNONCES === */
-.annonces-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
-    gap: 15px;
-    margin-top: 20px;
+.image-card img {
+  width: 100%;
+  height: 180px;
+  object-fit: cover;
+  border-radius: 10px;
 }
 
-/* === CARTE D’ANNONCE === */
+.image-title {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background: rgba(0, 0, 0, 0.5);
+  color: white;
+  font-size: 0.9rem;
+  text-align: center;
+  padding: 5px;
+}
+
+/* 🎯 Version mobile */
+@media (max-width: 768px) {
+  .images-container {
+    flex-wrap: nowrap; /* plus de retour à la ligne */
+  }
+
+  .image-card {
+    flex: 0 0 45%; /* 2 images visibles à la fois */
+    margin-right: 10px;
+  }
+}
+
+
+/*    SOUS ANNONCES.HTML    */
+
+
+.annonces-list {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  margin-top: 25px;
+}
+
 .annonce-card {
-    background-color: #fff;
-    border: 1px solid #eee;
-    border-radius: 10px;
-    box-shadow: 0 1px 4px rgba(0, 0, 0, 0.05);
-    overflow: hidden;
-    transition: transform 0.25s ease, box-shadow 0.25s ease;
-    display: flex;
-    flex-direction: column;
+  display: flex;
+  align-items: center;
+  gap: 20px;
+  background: rgba(255, 255, 255, 0.8); /* s’adapte au fond */
+  border-radius: 12px;
+  padding: 15px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
 }
 
 .annonce-card:hover {
-    transform: translateY(-3px);
-    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
-}
-
-/* === IMAGE DE L’ANNONCE === */
-.annonce-image {
-    width: 100%;
-    height: 140px;
-    background-color: #f0f0f0;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    overflow: hidden;
+  transform: translateY(-3px);
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15);
 }
 
 .annonce-image img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
+  width: 220px;
+  height: 160px;
+  object-fit: cover;
+  border-radius: 10px;
 }
 
-.placeholder-image {
-    font-size: 13px;
-    color: #888;
-}
-
-/* === CONTENU DE L’ANNONCE === */
 .annonce-content {
-    flex: 1;
-    padding: 10px;
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
 }
 
-.annonce-titre {
-    font-size: 15px;
-    font-weight: 600;
-    color: #222;
-    margin-bottom: 6px;
+.annonce-content h3 {
+  font-size: 1.2rem;
+  color: #333;
 }
 
-.annonce-description {
-    font-size: 13px;
-    color: #555;
-    margin-bottom: 8px;
+.description {
+  color: #555;
+  font-size: 0.95rem;
 }
 
-.annonce-prix {
-    font-size: 14px;
-    font-weight: 600;
-    color: #008060; /* couleur type e-commerce */
-    margin-bottom: 8px;
+.prix {
+  font-size: 1rem;
+  color: #e67e22;
 }
 
-/* === BOUTONS DE CONTACT === */
 .contact {
-    display: flex;
-    justify-content: flex-start;
-    gap: 8px;
-    flex-wrap: wrap;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin-top: 8px;
 }
 
-.whatsapp-btn,
+.whatsapp-btn, .email-btn {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  background: #25D366;
+  color: white;
+  padding: 8px 12px;
+  border-radius: 8px;
+  text-decoration: none;
+  font-size: 0.9rem;
+  transition: background 0.2s ease;
+}
+
 .email-btn {
-    display: inline-flex;
-    align-items: center;
-    gap: 6px;
-    padding: 6px 10px;
-    border-radius: 6px;
-    font-size: 13px;
-    text-decoration: none;
-    transition: background-color 0.25s ease;
-    color: #fff;
-}
-
-.whatsapp-btn {
-    background-color: #25D366;
+  background: #3498db;
 }
 
 .whatsapp-btn:hover {
-    background-color: #1ebd58;
-}
-
-.whatsapp-icon {
-    width: 16px;
-    height: 16px;
-}
-
-.email-btn {
-    background-color: #007BFF;
+  background: #1ebe5d;
 }
 
 .email-btn:hover {
-    background-color: #006ae6;
+  background: #2c80b4;
 }
 
-/* === AUCUNE ANNONCE === */
-.no-annonce {
-    text-align: center;
-    color: #888;
-    font-size: 14px;
-    margin-top: 30px;
+.whatsapp-btn img {
+  width: 18px;
+  height: 18px;
 }
 
-/* === RESPONSIVE === */
-@media (max-width: 600px) {
-    .categorie-titre {
-        font-size: 18px;
-    }
+/* 📱 Version mobile */
+@media (max-width: 768px) {
+  .annonce-card {
+    flex-direction: column; /* image en haut */
+    align-items: flex-start;
+  }
 
-    .annonces-grid {
-        grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
-        gap: 10px;
-    }
+  .annonce-image img {
+    width: 100%;
+    height: auto;
+  }
 
-    .annonce-titre {
-        font-size: 14px;
-    }
-
-    .annonce-description {
-        font-size: 12px;
-    }
-
-    .annonce-prix {
-        font-size: 13px;
-    }
+  .annonce-content {
+    padding-top: 10px;
+  }
 }
 
 

@@ -5,3 +5,5 @@ tzdata==2025.2
 gunicorn
 Pillow
 whitenoise
+dj-database-url
+psycopg2-binary
