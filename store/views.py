@@ -29,13 +29,14 @@ def home(request):
 def annonces_par_categorie(request, categorie_id):
     categorie = get_object_or_404(Categorie, id=categorie_id)
     sous_categories = categorie.sous_categories.all()
-    # récupère toutes les annonces de la catégorie (ordre récent -> ancien)
-    annonces = Annonce.objects.filter(sous_categorie__categorie=categorie).order_by('-date_pub')
+    annonces = Annonce.objects.filter(categorie=categorie).order_by('-date_pub')
+
     return render(request, 'store/annonces.html', {
         'categorie': categorie,
         'sous_categories': sous_categories,
         'annonces': annonces
     })
+
 
 def annonces_par_souscategorie(request, souscategorie_id):
     souscategorie = get_object_or_404(SousCategorie, id=souscategorie_id)
