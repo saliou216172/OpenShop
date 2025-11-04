@@ -15,7 +15,7 @@ def creer_annonce(request):
             annonce = form.save(commit=False)
             annonce.auteur = request.user
             annonce.save()
-            return redirect('home')
+            return redirect('store:home')
 
     return render(request, 'store/creer_annonce.html', {
         'form': form,
