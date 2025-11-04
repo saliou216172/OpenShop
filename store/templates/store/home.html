@@ -4,7 +4,7 @@
 
 <div class="categories-container">
     {% for categorie in categories %}
-        <a href="{% url 'annonces_par_categorie' categorie.id %}" class="categorie-card">
+        <a href="{% url 'store:annonces_par_categorie' categorie.id %}" class="categorie-card">
             {{ categorie.nom }}
         </a>
     {% endfor %}
@@ -13,7 +13,7 @@
 <section class="deposer-annonce">
   <div class="container">
     <h4>C'est le moment de vendre !</h4>
-    <a href="{% url 'creer_annonce' %}" class="btn-deposer">
+    <a href="{% url 'store:creer_annonce' %}" class="btn-deposer">
           <i class="fa fa-plus-circle"></i> Déposer une annonce
     </a>
 
