@@ -3,31 +3,38 @@
 {% block content %}
 
 <div class="annonces-container">
-    <h2 class="categorie-titre">Annonces dans la catégorie : {{ categorie.nom }}</h2>
+  <h2 class="categorie-titre">Annonces — {{ categorie.nom }}</h2>
 
-    <!-- Sous-catégories -->
-    <div class="sous-categories-container">
-        {% for sc in sous_categories %}
-            <a href="{% url 'annonces_par_souscategorie' sc.id %}" class="sous-categorie-btn">
-                {{ sc.nom }}
-            </a>
-        {% endfor %}
-    </div>
-
-<section class="annonces-images">
-  <h3>Annonces dans la catégorie {{ categorie.nom }}</h3>
-
-  <div class="images-container">
-    {% for annonce in annonces %}
-      <a href="{% url 'annonces_par_categorie' annonce.sous_categorie.categorie.id %}" class="image-card">
-        <img src="{{ annonce.image.url }}" alt="{{ annonce.titre }}">
-        <div class="image-title">{{ annonce.titre }}</div>
+  <!-- Sous-catégories (bandeau en haut) -->
+  <div class="sous-categories-bar">
+    {% for sc in sous_categories %}
+      <a href="{% url 'store:annonces_par_souscategorie' sc.id %}" class="sous-categorie-link">
+        {{ sc.nom }}
       </a>
-    {% empty %}
-      <p>Aucune annonce disponible pour cette catégorie.</p>
     {% endfor %}
   </div>
-</section>
 
-
+  <!-- Grille d'images -->
+  <section class="annonces-grid">
+    {% if annonces %}
+      {% for annonce in annonces %}
+        <article class="grid-card">
+          <a href="{% url 'store:detail_annonce' annonce.id %}">
+            {% if annonce.photo %}
+              <img class="grid-img" src="{{ annonce.photo.url }}" alt="{{ annonce.titre }}">
+            {% else %}
+              <img class="grid-img" src="{% static 'images/default.png' %}" alt="image par défaut">
+            {% endif %}
+            <div class="grid-caption">
+              <h3>{{ annonce.titre|truncatechars:40 }}</h3>
+              <p class="prix">{{ annonce.prix }} GNF</p>
+            </div>
+          </a>
+        </article>
+      {% endfor %}
+    {% else %}
+      <p>Aucune annonce disponible pour cette catégorie.</p>
+    {% endif %}
+  </section>
+</div>
 {% endblock %}

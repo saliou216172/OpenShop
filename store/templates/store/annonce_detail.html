@@ -1,0 +1,74 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block content %}
+
+<div class="detail-wrap">
+  <div class="detail-left">
+    <div class="main-image">
+      {% if annonce.photo %}
+        <img src="{{ annonce.photo.url }}" alt="{{ annonce.titre }}">
+      {% else %}
+        <img src="{% static 'images/default.png' %}" alt="image par défaut">
+      {% endif %}
+    </div>
+
+    <!-- Liste des autres annonces (miniatures) -->
+    {% if autres_annonces %}
+      <div class="autres-annonces">
+        <h4>Autres annonces dans {{ annonce.sous_categorie.nom }}</h4>
+        <ul>
+          {% for a in autres_annonces %}
+            <li>
+              <a href="{% url 'store:detail_annonce' a.id %}">
+                {% if a.photo %}
+                  <img src="{{ a.photo.url }}" alt="{{ a.titre }}">
+                {% else %}
+                  <img src="{% static 'images/default.png' %}" alt="img">
+                {% endif %}
+                <div class="mini-info">
+                  <span class="mini-title">{{ a.titre|truncatechars:30 }}</span>
+                  <span class="mini-price">{{ a.prix }} GNF</span>
+                </div>
+              </a>
+            </li>
+          {% endfor %}
+        </ul>
+      </div>
+    {% endif %}
+  </div>
+
+  <div class="detail-right">
+    <h1 class="annonce-title">{{ annonce.titre }}</h1>
+    <p class="categorie-line">
+      <strong>Catégorie :</strong> {{ annonce.categorie.nom }} —
+      <strong>Sous-catégorie :</strong> {{ annonce.sous_categorie.nom }}
+    </p>
+
+    <p class="prix-detail"><strong>{{ annonce.prix }} GNF</strong></p>
+
+    <div class="description-full">
+      <p>{{ annonce.description }}</p>
+    </div>
+
+    <div class="contact-actions">
+      <!-- WhatsApp -->
+      {% if annonce.telephone %}
+        <a class="btn-whatsapp" target="_blank"
+           href="https://wa.me/{{ annonce.telephone|regex_replace:'[^0-9]','' }}?text={{ 'Bonjour%20je%20suis%20intéressé%20par%20votre%20annonce%20:%20'|urlencode }}{{ annonce.titre|urlencode }}">
+          Contacter sur WhatsApp
+        </a>
+      {% endif %}
+
+      <!-- Email -->
+      {% if annonce.email_contact %}
+        <a class="btn-mail" href="mailto:{{ annonce.email_contact }}?subject={{ annonce.titre|urlencode }}">
+          Envoyer un email
+        </a>
+      {% endif %}
+    </div>
+
+    <p class="pub-date">Publié le : {{ annonce.date_pub }}</p>
+  </div>
+</div>
+
+{% endblock %}
