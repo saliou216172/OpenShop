@@ -6,7 +6,7 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
 # SECURITY
 SECRET_KEY = os.environ.get('SECRET_KEY', 'telly2018')  # à remplacer par une vraie clé en prod
-DEBUG = False
+DEBUG = True
 ALLOWED_HOSTS = ['openshop-ac2g.onrender.com', '*.onrender.com']
 
 # Application definition
