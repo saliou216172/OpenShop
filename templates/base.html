@@ -20,7 +20,7 @@
 
     <!-- Menu principal -->
     <ul class="nav-links" id="navLinks">
-      <li><a href="{% url 'creer_annonce' %}">Déposer une annonce</a></li>
+      <li><a href="{% url 'store:creer_annonce' %}">Déposer une annonce</a></li>
 
       {% if not user.is_authenticated %}
         <li><a href="{% url 'authentication:login' %}">Se connecter</a></li>
