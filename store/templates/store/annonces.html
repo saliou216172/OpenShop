@@ -2,10 +2,12 @@
 {% load static %}
 {% block content %}
 
+<link rel="stylesheet" href="{% static 'css/annonces.css' %}">
+
 <div class="annonces-container">
   <h2 class="categorie-titre">Annonces — {{ categorie.nom }}</h2>
 
-  <!-- Sous-catégories (bandeau en haut) -->
+  <!-- Bandeau sous-catégories -->
   <div class="sous-categories-bar">
     {% for sc in sous_categories %}
       <a href="{% url 'store:annonces_par_souscategorie' sc.id %}" class="sous-categorie-link">
@@ -14,7 +16,7 @@
     {% endfor %}
   </div>
 
-  <!-- Grille d'images -->
+  <!-- Grille d'annonces -->
   <section class="annonces-grid">
     {% if annonces %}
       {% for annonce in annonces %}
@@ -37,4 +39,5 @@
     {% endif %}
   </section>
 </div>
+
 {% endblock %}

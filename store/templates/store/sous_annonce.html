@@ -2,12 +2,15 @@
 {% load static %}
 {% block content %}
 
-<div class="container page-souscategorie">
+<link rel="stylesheet" href="{% static 'css/sous_annonces.css' %}">
+
+<div class="page-souscategorie">
   <h2 class="page-titre">Annonces — {{ souscategorie.nom }}</h2>
 
   <div class="annonces-list">
     {% for annonce in annonces %}
       <div class="annonce-row">
+        <!-- Photo à gauche -->
         <a href="{% url 'store:detail_annonce' annonce.id %}" class="annonce-thumb">
           {% if annonce.photo %}
             <img src="{{ annonce.photo.url }}" alt="{{ annonce.titre }}">
@@ -16,6 +19,7 @@
           {% endif %}
         </a>
 
+        <!-- Infos à droite -->
         <div class="annonce-info">
           <h3><a href="{% url 'store:detail_annonce' annonce.id %}">{{ annonce.titre }}</a></h3>
           <p class="description">{{ annonce.description|truncatewords:25 }}</p>
@@ -31,4 +35,5 @@
     {% endfor %}
   </div>
 </div>
+
 {% endblock %}

@@ -2,7 +2,10 @@
 {% load static %}
 {% block content %}
 
+<link rel="stylesheet" href="{% static 'css/annonce_detail.css' %}">
+
 <div class="detail-wrap">
+  <!-- Colonne gauche : image principale + miniatures -->
   <div class="detail-left">
     <div class="main-image">
       {% if annonce.photo %}
@@ -12,7 +15,6 @@
       {% endif %}
     </div>
 
-    <!-- Liste des autres annonces (miniatures) -->
     {% if autres_annonces %}
       <div class="autres-annonces">
         <h4>Autres annonces dans {{ annonce.sous_categorie.nom }}</h4>
@@ -37,6 +39,7 @@
     {% endif %}
   </div>
 
+  <!-- Colonne droite : détails -->
   <div class="detail-right">
     <h1 class="annonce-title">{{ annonce.titre }}</h1>
     <p class="categorie-line">
@@ -51,7 +54,6 @@
     </div>
 
     <div class="contact-actions">
-      <!-- WhatsApp -->
       {% if annonce.telephone %}
         <a class="btn-whatsapp" target="_blank"
            href="https://wa.me/{{ annonce.telephone|regex_replace:'[^0-9]','' }}?text={{ 'Bonjour%20je%20suis%20intéressé%20par%20votre%20annonce%20:%20'|urlencode }}{{ annonce.titre|urlencode }}">
@@ -59,7 +61,6 @@
         </a>
       {% endif %}
 
-      <!-- Email -->
       {% if annonce.email_contact %}
         <a class="btn-mail" href="mailto:{{ annonce.email_contact }}?subject={{ annonce.titre|urlencode }}">
           Envoyer un email

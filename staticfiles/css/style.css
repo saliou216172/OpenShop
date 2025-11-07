@@ -306,297 +306,359 @@
 
 
 /* ------------------------------------------   Annonces.html------------------------------------------------------------------------  */
+/* annonces.css */
 
-
-/* contenaire sous categoris */
-
+/* Conteneur principal */
 .annonces-container {
-    max-width: 1200px;
-    margin: 40px auto;
-    padding: 20px;
+  padding: 20px;
+  max-width: 1200px;
+  margin: 0 auto;
+  font-family: 'Arial', sans-serif;
 }
 
+/* Titre de catégorie */
 .categorie-titre {
-    font-size: 1.8rem;
-    font-weight: 600;
-    margin-bottom: 20px;
-    color: #333;
-    border-left: 5px solid #007bff;
-    padding-left: 10px;
-}
-
-/* Conteneur horizontal des sous-catégories */
-.sous-categories-container {
-    display: flex;
-    flex-wrap: nowrap;              /* empêche le retour à la ligne */
-    overflow-x: auto;               /* active le défilement horizontal si nécessaire */
-    scrollbar-width: thin;          /* pour Firefox */
-    scrollbar-color: #007bff #f1f1f1;
-    gap: 15px;
-    padding: 10px 0;
-}
-
-/* Style pour le scroll sur Chrome, Edge, Safari */
-.sous-categories-container::-webkit-scrollbar {
-    height: 6px;
-}
-.sous-categories-container::-webkit-scrollbar-track {
-    background: #f1f1f1;
-    border-radius: 3px;
-}
-.sous-categories-container::-webkit-scrollbar-thumb {
-    background: #007bff;
-    border-radius: 3px;
-}
-
-/* Boutons de sous-catégories */
-.sous-categorie-btn {
-    flex: 0 0 auto;                 /* empêche la mise à l’échelle */
-    background-color: #ffffff;
-    color: #007bff;
-    border: 1px solid #007bff;
-    border-radius: 30px;
-    padding: 10px 18px;
-    font-size: 0.95rem;
-    text-decoration: none;
-    font-weight: 500;
-    transition: all 0.3s ease;
-    white-space: nowrap;            /* empêche le texte de passer à la ligne */
-    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05);
-}
-
-/* Effet au survol */
-.sous-categorie-btn:hover {
-    background-color: #007bff;
-    color: #fff;
-    box-shadow: 0 3px 8px rgba(0, 123, 255, 0.3);
-    transform: translateY(-2px);
-}
-
-/* Design responsive */
-@media (max-width: 768px) {
-    .categorie-titre {
-        font-size: 1.5rem;
-    }
-
-    .sous-categorie-btn {
-        padding: 8px 15px;
-        font-size: 0.9rem;
-    }
-}
-
-
-/*  image  */
-.annonces-images {
-  margin: 30px 0;
-  background-color: transparent; /* pas de couleur de conteneur visible */
-}
-
-.annonces-images h3 {
+  color: #e67e22; /* orange doux */
+  font-size: 28px;
+  font-weight: 600;
   margin-bottom: 15px;
-  font-size: 1.4rem;
-  text-align: center;
-  color: #333;
 }
 
-.images-container {
+/* Bandeau sous-catégories */
+.sous-categories-bar {
   display: flex;
-  flex-wrap: wrap; /* permet de passer à la ligne sur PC */
-  gap: 15px;
-  justify-content: center;
-  overflow-x: auto; /* permet de défiler horizontalement sur mobile */
-  scrollbar-width: none; /* supprime la barre de défilement */
+  flex-wrap: wrap;
+  gap: 10px;
+  margin-bottom: 20px;
 }
 
-.images-container::-webkit-scrollbar {
-  display: none; /* supprime la barre de défilement sur Chrome/Safari */
+.sous-categorie-link {
+  background-color: #f8d7b0; /* orange clair */
+  padding: 8px 14px;
+  border-radius: 6px;
+  text-decoration: none;
+  color: #333;
+  font-weight: 500;
+  transition: all 0.3s;
 }
 
-.image-card {
-  position: relative;
-  flex: 1 0 200px; /* largeur fixe sur grand écran */
-  max-width: 250px;
+.sous-categorie-link:hover {
+  background-color: #e67e22;
+  color: #fff;
+}
+
+/* Grille d'annonces */
+.annonces-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 20px;
+}
+
+/* Carte individuelle */
+.grid-card {
   border-radius: 10px;
   overflow: hidden;
-  text-decoration: none;
-  transition: transform 0.3s ease;
+  background-color: #fff;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.08);
+  transition: transform 0.2s;
 }
 
-.image-card:hover {
-  transform: scale(1.03);
+.grid-card:hover {
+  transform: translateY(-5px);
 }
 
-.image-card img {
+.grid-img {
   width: 100%;
   height: 180px;
   object-fit: cover;
-  border-radius: 10px;
 }
 
-.image-title {
-  position: absolute;
-  bottom: 0;
-  left: 0;
-  right: 0;
-  background: rgba(0, 0, 0, 0.5);
-  color: white;
-  font-size: 0.9rem;
+.grid-caption {
+  padding: 10px;
   text-align: center;
-  padding: 5px;
 }
 
-/* 🎯 Version mobile */
+.grid-caption h3 {
+  font-size: 16px;
+  margin: 5px 0;
+  color: #333;
+}
+
+.prix {
+  color: #e67e22;
+  font-weight: bold;
+  font-size: 14px;
+}
+
+/* Responsive mobile */
 @media (max-width: 768px) {
-  .images-container {
-    flex-wrap: nowrap; /* plus de retour à la ligne */
+  .annonces-grid {
+    grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+    gap: 15px;
   }
-
-  .image-card {
-    flex: 0 0 45%; /* 2 images visibles à la fois */
-    margin-right: 10px;
+  .categorie-titre {
+    font-size: 24px;
+  }
+  .sous-categorie-link {
+    padding: 6px 10px;
+    font-size: 14px;
   }
 }
 
+/*  --------------------------------sous-annonces.html------------------------------------*/
 
-/*  ANNONCES.HTML  SOUS ANNONCES.HTML    */
+/* sous_annonces.css */
 
-:root{
-  --orange:#ff7a2d; /* orange pro */
-  --orange-dark:#e36919;
-  --muted:#666;
-  --bg:#fafafa;
-  --card-bg:#fff;
-  --radius:10px;
-  --max-width:1200px;
+.page-souscategorie {
+  padding: 20px;
+  max-width: 1000px;
+  margin: 0 auto;
+  font-family: 'Arial', sans-serif;
 }
 
-body {
-  font-family: Inter, "Helvetica Neue", Arial, sans-serif;
-  background: var(--bg);
-  color: #222;
+.page-titre {
+  color: #e67e22;
+  font-size: 26px;
+  font-weight: 600;
+  margin-bottom: 20px;
+}
+
+/* Liste verticale d'annonces */
+.annonces-list {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+
+/* Ligne individuelle */
+.annonce-row {
+  display: flex;
+  align-items: flex-start;
+  gap: 15px;
+  padding: 10px 0;
+  border-bottom: 1px solid #ddd;
+  transition: background 0.2s;
+}
+
+.annonce-row:hover {
+  background-color: #fff4e6;
+}
+
+.annonce-thumb img {
+  width: 180px;
+  height: 120px;
+  object-fit: cover;
+  border-radius: 6px;
+}
+
+/* Infos */
+.annonce-info {
+  flex: 1;
+}
+
+.annonce-info h3 {
   margin: 0;
+  font-size: 18px;
+  color: #333;
+}
+
+.annonce-info h3 a {
+  text-decoration: none;
+  color: #333;
+  transition: color 0.2s;
+}
+
+.annonce-info h3 a:hover {
+  color: #e67e22;
+}
+
+.description {
+  font-size: 14px;
+  color: #555;
+  margin: 6px 0;
+}
+
+.meta {
+  font-size: 13px;
+  color: #777;
+}
+
+.meta .prix {
+  color: #e67e22;
+  font-weight: bold;
+}
+
+/* Ligne de séparation */
+.sep {
+  border: none;
+  border-bottom: 1px solid #ddd;
+  margin: 10px 0;
+}
+
+/* Responsive mobile */
+@media (max-width: 768px) {
+  .annonce-row {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+  .annonce-thumb img {
+    width: 100%;
+    height: auto;
+  }
+}
+
+/*----------------------------annonce_details--------------------------------  */
+
+/* annonce_detail.css */
+
+.detail-wrap {
+  display: flex;
+  gap: 25px;
+  padding: 20px;
+  max-width: 1200px;
+  margin: 0 auto;
+  font-family: 'Arial', sans-serif;
+  flex-wrap: wrap;
+}
+
+/* Colonne gauche : image principale + miniatures */
+.detail-left {
+  flex: 1 1 400px;
+}
+
+.main-image img {
+  width: 100%;
+  height: auto;
+  border-radius: 8px;
+}
+
+/* Autres annonces miniatures */
+.autres-annonces {
+  margin-top: 20px;
+}
+
+.autres-annonces h4 {
+  color: #e67e22;
+  font-size: 16px;
+  margin-bottom: 10px;
+}
+
+.autres-annonces ul {
+  display: flex;
+  gap: 10px;
+  flex-wrap: wrap;
+  list-style: none;
   padding: 0;
 }
 
-/* ---- Top titles ---- */
-.categorie-titre, .page-titre {
-  max-width: var(--max-width);
-  margin: 24px auto;
-  padding: 8px 16px;
-  color: #222;
+.autres-annonces li {
+  flex: 0 0 100px;
+  text-align: center;
 }
 
-/* Sous-categories bar */
-.sous-categories-bar {
-  display:flex;
-  gap:8px;
-  flex-wrap:wrap;
-  max-width:var(--max-width);
-  margin: 0 auto 18px;
-  padding: 8px 16px;
-}
-.sous-categorie-link{
-  background: white;
-  border:2px solid rgba(0,0,0,0.06);
-  padding:6px 12px;
-  border-radius:8px;
-  text-decoration:none;
-  color:var(--muted);
-  font-weight:600;
-  box-shadow: 0 2px 6px rgba(0,0,0,0.03);
-}
-.sous-categorie-link:hover{
-  border-color:var(--orange);
-  color:var(--orange-dark);
+.autres-annonces img {
+  width: 100px;
+  height: 70px;
+  object-fit: cover;
+  border-radius: 6px;
 }
 
-/* ---- Grid for category images ---- */
-.annonces-grid{
-  display:grid;
-  gap:16px;
-  grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
-  max-width:var(--max-width);
-  margin:16px auto 60px;
-  padding: 0 16px;
-}
-.grid-card{
-  background:var(--card-bg);
-  border-radius: var(--radius);
-  overflow:hidden;
-  transition: transform .18s ease, box-shadow .18s;
-}
-.grid-card:hover{ transform: translateY(-6px); box-shadow: 0 8px 30px rgba(0,0,0,0.08); }
-.grid-img{ width:100%; height:160px; object-fit:cover; display:block; }
-.grid-caption{ padding:10px 12px; }
-.grid-caption h3{ margin:0 0 6px; font-size:16px; color:#222; }
-.prix{ color:var(--orange-dark); font-weight:700; }
-
-/* ---- Sous-catégorie list layout ---- */
-.container{ max-width:var(--max-width); margin:0 auto; padding:16px; }
-.annonce-row{ display:flex; gap:16px; align-items:flex-start; padding:12px 0; }
-.annonce-thumb img{ width:220px; height:140px; object-fit:cover; border-radius:8px; }
-.annonce-info h3{ margin:0 0 6px; font-size:18px; }
-.annonce-info p.description{ margin:0 0 8px; color:var(--muted); }
-
-/* ---- Detail layout ---- */
-.detail-wrap{
-  max-width:var(--max-width);
-  margin:24px auto;
-  display:grid;
-  grid-template-columns: 1fr 420px; /* gauche = image (flexible), droite = details */
-  gap:24px;
-  padding:16px;
-}
-.detail-left .main-image img{
-  width:100%;
-  height:420px;
-  object-fit:cover;
-  border-radius:12px;
-  box-shadow: 0 6px 20px rgba(0,0,0,0.06);
-}
-.autres-annonces{ margin-top:18px; background: #fff; padding:12px; border-radius:10px; }
-.autres-annonces h4{ margin:0 0 8px; font-size:14px; }
-.autres-annonces ul{ list-style:none; margin:0; padding:0; display:flex; flex-direction:column; gap:8px; }
-.autres-annonces li a{ display:flex; gap:8px; align-items:center; text-decoration:none; color:inherit; }
-.autres-annonces img{ width:70px; height:70px; object-fit:cover; border-radius:8px; }
-
-/* right column */
-.detail-right{ background:#fff; padding:18px; border-radius:12px; box-shadow: 0 6px 24px rgba(0,0,0,0.04); }
-.annonce-title{ margin:0 0 8px; }
-.categorie-line{ color:var(--muted); margin-bottom:12px; }
-.prix-detail{ font-size:22px; color:var(--orange-dark); margin-bottom:12px; font-weight:800; }
-.description-full{ color:#333; margin-bottom:16px; line-height:1.5; }
-
-.contact-actions{ display:flex; gap:12px; margin-bottom:12px; flex-wrap:wrap; }
-.btn-whatsapp, .btn-mail{
-  display:inline-block; padding:10px 14px; text-decoration:none; border-radius:10px; font-weight:700;
-}
-.btn-whatsapp{
-  background: linear-gradient(90deg,var(--orange),var(--orange-dark));
-  color:white;
-}
-.btn-mail{
-  background: transparent; border:2px solid var(--orange); color:var(--orange-dark);
+.mini-info {
+  font-size: 12px;
+  color: #555;
 }
 
-/* small text */
-.pub-date{ color:var(--muted); margin-top:10px; }
-
-/* separateur */
-.sep{ border:0; height:1px; background: #eee; margin:12px 0; }
-
-/* Responsive adjustments */
-@media (max-width: 980px){
-  .detail-wrap{ grid-template-columns: 1fr; }
-  .detail-left .main-image img{ height:320px; }
-  .detail-right{ margin-top:12px; }
-}
-@media (max-width:600px){
-  .grid-img{ height:140px; }
-  .annonce-thumb img{ width:140px; height:100px; }
-  .autres-annonces img{ width:56px; height:56px; }
+.mini-title {
+  display: block;
+  color: #333;
 }
 
+.mini-price {
+  color: #e67e22;
+  font-weight: bold;
+}
+
+/* Colonne droite : détails */
+.detail-right {
+  flex: 1 1 300px;
+}
+
+.annonce-title {
+  color: #e67e22;
+  font-size: 28px;
+  font-weight: 600;
+  margin-bottom: 10px;
+}
+
+.categorie-line {
+  font-size: 14px;
+  margin-bottom: 10px;
+}
+
+.prix-detail {
+  color: #e67e22;
+  font-weight: bold;
+  font-size: 22px;
+  margin-bottom: 15px;
+}
+
+.description-full p {
+  line-height: 1.6;
+  color: #555;
+}
+
+/* Boutons contact */
+.contact-actions {
+  display: flex;
+  gap: 10px;
+  margin: 15px 0;
+}
+
+.btn-whatsapp, .btn-mail {
+  text-decoration: none;
+  padding: 8px 15px;
+  border-radius: 6px;
+  font-weight: 500;
+  color: #fff;
+  transition: opacity 0.2s;
+}
+
+.btn-whatsapp {
+  background-color: #25d366;
+}
+
+.btn-whatsapp:hover {
+  opacity: 0.8;
+}
+
+.btn-mail {
+  background-color: #e67e22;
+}
+
+.btn-mail:hover {
+  opacity: 0.8;
+}
+
+.pub-date {
+  font-size: 13px;
+  color: #777;
+}
+
+/* Responsive mobile */
+@media (max-width: 768px) {
+  .detail-wrap {
+    flex-direction: column;
+  }
+  .detail-left, .detail-right {
+    flex: 1 1 100%;
+  }
+  .autres-annonces li {
+    flex: 0 0 80px;
+  }
+  .annonce-title {
+    font-size: 24px;
+  }
+}
 
 /* Partie temporaire */
 
