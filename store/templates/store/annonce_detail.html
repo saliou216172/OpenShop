@@ -56,7 +56,8 @@
     <div class="contact-actions">
       {% if annonce.telephone %}
         <a class="btn-whatsapp" target="_blank"
-           href="https://wa.me/{{ annonce.telephone|regex_replace:'[^0-9]','' }}?text={{ 'Bonjour%20je%20suis%20intéressé%20par%20votre%20annonce%20:%20'|urlencode }}{{ annonce.titre|urlencode }}">
+           href="https://wa.me/{{ telephone_clean }}?text={{ 'Bonjour je suis intéressé par votre annonce : '|urlencode }}{{ annonce.titre|urlencode }}"
+>
           Contacter sur WhatsApp
         </a>
       {% endif %}

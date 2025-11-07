@@ -42,21 +42,23 @@ def annonces_par_souscategorie(request, souscategorie_id):
     souscategorie = get_object_or_404(SousCategorie, id=souscategorie_id)
     # affiche une liste verticale d'annonces, les plus récentes en haut
     annonces = Annonce.objects.filter(sous_categorie_id=souscategorie.id).order_by('-date_pub')
-    return render(request, 'store/sous_annonces.html', {
+    return render(request, 'store/sous_annonce.html', {
         'annonces': annonces,
         'souscategorie': souscategorie
     })
 
-def detail_annonce(request, annonce_id):
-    annonce = get_object_or_404(Annonce, id=annonce_id)
-    # autres annonces de la même sous-catégorie (exclut l'actuelle), limitées à 6
-    autres_annonces = Annonce.objects.filter(
-        sous_categorie=annonce.sous_categorie
-    ).exclude(id=annonce.id).order_by('-date_pub')[:6]
+def detail_annonce(request, pk):
+    annonce = get_object_or_404(Annonce, pk=pk)
+
+    telephone_clean = None
+    if annonce.telephone:
+        telephone_clean = ''.join(filter(str.isdigit, annonce.telephone))
+
     return render(request, 'store/annonce_detail.html', {
         'annonce': annonce,
-        'autres_annonces': autres_annonces
+        'telephone_clean': telephone_clean
     })
+
 
 def get_sous_categories(request):
     categorie_id = request.GET.get('categorie_id')
