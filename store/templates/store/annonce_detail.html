@@ -5,7 +5,8 @@
 <link rel="stylesheet" href="{% static 'css/annonce_detail.css' %}">
 
 <div class="detail-wrap">
-  <!-- Colonne gauche : image principale + miniatures -->
+
+  <!-- COLONNE GAUCHE : IMAGE PRINCIPALE -->
   <div class="detail-left">
     <div class="main-image">
       {% if annonce.photo %}
@@ -14,63 +15,61 @@
         <img src="{% static 'images/default.png' %}" alt="image par défaut">
       {% endif %}
     </div>
-
-    {% if autres_annonces %}
-      <div class="autres-annonces">
-        <h4>Autres annonces dans {{ annonce.sous_categorie.nom }}</h4>
-        <ul>
-          {% for a in autres_annonces %}
-            <li>
-              <a href="{% url 'store:detail_annonce' a.id %}">
-                {% if a.photo %}
-                  <img src="{{ a.photo.url }}" alt="{{ a.titre }}">
-                {% else %}
-                  <img src="{% static 'images/default.png' %}" alt="img">
-                {% endif %}
-                <div class="mini-info">
-                  <span class="mini-title">{{ a.titre|truncatechars:30 }}</span>
-                  <span class="mini-price">{{ a.prix }} GNF</span>
-                </div>
-              </a>
-            </li>
-          {% endfor %}
-        </ul>
-      </div>
-    {% endif %}
   </div>
 
-  <!-- Colonne droite : détails -->
+  <!-- COLONNE DROITE : DÉTAILS -->
   <div class="detail-right">
     <h1 class="annonce-title">{{ annonce.titre }}</h1>
     <p class="categorie-line">
-      <strong>Catégorie :</strong> {{ annonce.categorie.nom }} —
+      <strong>Catégorie :</strong> {{ annonce.categorie.nom }} — 
       <strong>Sous-catégorie :</strong> {{ annonce.sous_categorie.nom }}
     </p>
-
     <p class="prix-detail"><strong>{{ annonce.prix }} GNF</strong></p>
-
     <div class="description-full">
       <p>{{ annonce.description }}</p>
     </div>
 
     <div class="contact-actions">
       {% if annonce.telephone %}
-        <a class="btn-whatsapp" target="_blank"
-           href="https://wa.me/{{ telephone_clean }}?text={{ 'Bonjour je suis intéressé par votre annonce : '|urlencode }}{{ annonce.titre|urlencode }}"
->
-          Contacter sur WhatsApp
+        <a class="btn btn-whatsapp" target="_blank"
+           href="https://wa.me/{{ telephone_clean }}?text={{ 'Bonjour, je suis intéressé par votre annonce : '|urlencode }}{{ annonce.titre|urlencode }}">
+          Contacter via WhatsApp
         </a>
       {% endif %}
-
       {% if annonce.email_contact %}
-        <a class="btn-mail" href="mailto:{{ annonce.email_contact }}?subject={{ annonce.titre|urlencode }}">
-          Envoyer un email
+        <a class="btn btn-mail"
+           href="mailto:{{ annonce.email_contact }}?subject={{ annonce.titre|urlencode }}">
+          Envoyer un e-mail
         </a>
       {% endif %}
     </div>
 
     <p class="pub-date">Publié le : {{ annonce.date_pub }}</p>
   </div>
+
 </div>
+
+{% if autres_annonces %}
+  <section class="similaires-section">
+    <h2>Autres annonces dans {{ annonce.sous_categorie.nom }}</h2>
+    <div class="similaires-grid">
+      {% for a in autres_annonces %}
+      <article class="grid-card">
+        <a href="{% url 'store:detail_annonce' a.id %}">
+          {% if a.photo %}
+            <img class="grid-img" src="{{ a.photo.url }}" alt="{{ a.titre }}">
+          {% else %}
+            <img class="grid-img" src="{% static 'images/default.png' %}" alt="image par défaut">
+          {% endif %}
+          <div class="grid-caption">
+            <h3>{{ a.titre|truncatechars:40 }}</h3>
+            <p class="prix">{{ a.prix }} GNF</p>
+          </div>
+        </a>
+      </article>
+      {% endfor %}
+    </div>
+  </section>
+{% endif %}
 
 {% endblock %}

@@ -434,315 +434,419 @@
 /*  --------------------------------sous-annonces.html------------------------------------*/
 
 /* sous_annonces.css */
-
-.page-souscategorie {
-  padding: 20px;
-  max-width: 1000px;
-  margin: 0 auto;
-  font-family: 'Arial', sans-serif;
+.annonces-container {
+    width: 90%;
+    max-width: 1100px;
+    margin: 40px auto;
+    font-family: "Poppins", sans-serif;
 }
 
-.page-titre {
-  color: #e67e22;
-  font-size: 26px;
-  font-weight: 600;
-  margin-bottom: 20px;
+.titre-page {
+    font-size: 26px;
+    font-weight: 600;
+    margin-bottom: 25px;
+    color: #111;
 }
 
-/* Liste verticale d'annonces */
 .annonces-list {
-  display: flex;
-  flex-direction: column;
-  gap: 15px;
+    display: flex;
+    flex-direction: column;
+    gap: 25px;
 }
 
-/* Ligne individuelle */
-.annonce-row {
-  display: flex;
-  align-items: flex-start;
-  gap: 15px;
-  padding: 10px 0;
-  border-bottom: 1px solid #ddd;
-  transition: background 0.2s;
+/* --- CARTE --- */
+.annonce-card {
+    display: flex;
+    padding: 18px;
+    border-radius: 12px;
+    background: #fff;
+    border: 1px solid #e6e6e6;
+    box-shadow: 0 3px 8px rgba(0,0,0,0.05);
+    transition: 0.2s;
 }
 
-.annonce-row:hover {
-  background-color: #fff4e6;
+.annonce-card:hover {
+    transform: scale(1.01);
 }
 
-.annonce-thumb img {
-  width: 180px;
-  height: 120px;
-  object-fit: cover;
-  border-radius: 6px;
+/* --- IMAGE --- */
+.img-wrapper {
+    width: 180px;
+    height: 150px;
+    overflow: hidden;
+    border-radius: 10px;
+    flex-shrink: 0;
 }
 
-/* Infos */
-.annonce-info {
-  flex: 1;
+.img-wrapper img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
 }
 
-.annonce-info h3 {
-  margin: 0;
-  font-size: 18px;
-  color: #333;
+/* --- INFORMATIONS --- */
+.infos {
+    margin-left: 18px;
+    flex: 1;
 }
 
-.annonce-info h3 a {
-  text-decoration: none;
-  color: #333;
-  transition: color 0.2s;
+.titre a {
+    font-size: 20px;
+    font-weight: 600;
+    color: #222;
+    text-decoration: none;
 }
 
-.annonce-info h3 a:hover {
-  color: #e67e22;
+.titre a:hover {
+    color: #007bff;
 }
 
 .description {
-  font-size: 14px;
-  color: #555;
-  margin: 6px 0;
+    margin: 8px 0 10px;
+    color: #444;
+    font-size: 14px;
 }
 
 .meta {
-  font-size: 13px;
-  color: #777;
-}
-
-.meta .prix {
-  color: #e67e22;
-  font-weight: bold;
-}
-
-/* Ligne de séparation */
-.sep {
-  border: none;
-  border-bottom: 1px solid #ddd;
-  margin: 10px 0;
-}
-
-/* Responsive mobile */
-@media (max-width: 768px) {
-  .annonce-row {
-    flex-direction: column;
-    align-items: flex-start;
-  }
-  .annonce-thumb img {
-    width: 100%;
-    height: auto;
-  }
-}
-
-/*----------------------------annonce_details--------------------------------  */
-
-/* ===============================
-   GLOBAL
-=============================== */
-.detail-wrap {
+    font-size: 14px;
+    margin-bottom: 12px;
     display: flex;
-    gap: 35px;
-    padding: 25px;
-    max-width: 1200px;
-    margin: 20px auto;
-    font-family: "Poppins", sans-serif;
+    justify-content: space-between;
+    color: #555;
+}
+
+.prix {
+    font-weight: bold;
+    font-size: 16px;
+    color: #009432;
+}
+
+/* --- BOUTONS --- */
+.contact-buttons {
+    display: flex;
+    gap: 10px;
     flex-wrap: wrap;
 }
 
-/* ===============================
-   COLONNE GAUCHE
-=============================== */
-.detail-left {
-    flex: 1 1 450px;
-}
-
-.main-image img {
-    width: 100%;
-    height: 420px;
-    object-fit: cover;
-    border-radius: 14px;
-    box-shadow: 0 3px 10px rgba(0,0,0,0.12);
-    background: #f5f5f5;
-}
-
-/* ===============================
-   AUTRES ANNONCES — version pro
-=============================== */
-.autres-annonces {
-    margin-top: 30px;
-}
-
-.autres-annonces h4 {
-    font-size: 20px;
-    font-weight: 600;
-    color: #ff7a00; /* Orange référence */
-    margin-bottom: 15px;
-}
-
-/* Conteneur grille */
-.autres-annonces ul {
-    display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
-    gap: 15px;
-    list-style: none;
-    padding: 0;
-}
-
-/* Chaque carte miniature */
-.autres-annonces li {
-    background: white;
-    border-radius: 12px;
-    overflow: hidden;
-    box-shadow: 0 2px 6px rgba(0,0,0,0.1);
-    transition: 0.25s ease;
-}
-
-.autres-annonces li:hover {
-    transform: translateY(-4px);
-    box-shadow: 0 4px 10px rgba(0,0,0,0.15);
-}
-
-.autres-annonces li a {
-    text-decoration: none;
-    color: inherit;
-    display: block;
-}
-
-.autres-annonces img {
-    width: 100%;
-    height: 110px;
-    object-fit: cover;
-}
-
-.mini-info {
-    padding: 8px;
-}
-
-.mini-title {
-    font-size: 13px;
-    font-weight: 600;
-    display: block;
-    color: #333;
-}
-
-.mini-price {
+.btn {
+    padding: 8px 14px;
+    border-radius: 8px;
     font-size: 14px;
-    font-weight: bold;
-    color: #ff7a00;
+    font-weight: 500;
+    text-decoration: none;
+    color: #fff;
+    transition: 0.2s;
 }
 
-/* ===============================
-   COLONNE DROITE
-=============================== */
+.btn.whatsapp {
+    background: #25D366;
+}
+
+.btn.whatsapp:hover {
+    background: #1ebc59;
+}
+
+.btn.email {
+    background: #0984e3;
+}
+
+.btn.email:hover {
+    background: #086ec1;
+}
+
+.btn.voir {
+    background: #333;
+}
+
+.btn.voir:hover {
+    background: #000;
+}
+
+/* --- MESSAGE VIDE --- */
+.empty {
+    font-size: 17px;
+    color: #777;
+    text-align: center;
+    margin-top: 40px;
+}
+
+/* --- RESPONSIVE --- */
+@media (max-width: 768px) {
+    .annonce-card {
+        flex-direction: column;
+        text-align: center;
+    }
+
+    .img-wrapper {
+        width: 100%;
+        height: 200px;
+        margin-bottom: 15px;
+    }
+
+    .infos {
+        margin-left: 0;
+    }
+
+    .meta {
+        justify-content: center;
+        gap: 15px;
+    }
+
+    .contact-buttons {
+        justify-content: center;
+    }
+}
+
+/* --- RESPONSIVE MOBILE OPTIMISÉ --- */
+@media (max-width: 768px) {
+
+    .annonce-card {
+        flex-direction: column;
+        padding: 15px;
+        border-radius: 14px;
+    }
+
+    .img-wrapper {
+        width: 100%;
+        height: 260px;
+        border-radius: 12px;
+        margin-bottom: 12px;
+    }
+
+    .infos {
+        margin-left: 0;
+        text-align: center;
+    }
+
+    .titre a {
+        font-size: 18px;
+    }
+
+    .description {
+        font-size: 14px;
+        line-height: 1.45;
+        margin-bottom: 12px;
+    }
+
+    .meta {
+        font-size: 14px;
+        display: flex;
+        flex-direction: column;
+        gap: 4px;
+        align-items: center;
+    }
+
+    .prix {
+        font-size: 18px;
+        color: #009432;
+    }
+
+    .contact-buttons {
+        margin-top: 12px;
+        display: flex;
+        flex-direction: column;
+        gap: 10px;
+    }
+
+    .btn {
+        width: 100%;
+        padding: 12px;
+        font-size: 16px;
+        border-radius: 10px;
+    }
+}
+
+/*----------------------------annonce_details--------------------------------  */
+/* === Conteneur global === */
+.detail-wrap {
+  display: flex;
+  flex-wrap: wrap;
+  width: 90%;
+  max-width: 1100px;
+  margin: 40px auto;
+  font-family: "Poppins", sans-serif;
+  gap: 24px;
+}
+
+/* --- Colonne gauche : image --- */
+.detail-left {
+  flex: 1 1 350px;
+  min-width: 300px;
+}
+.main-image {
+  width: 100%;
+  border-radius: 12px;
+  overflow: hidden;
+  box-shadow: 0 3px 8px rgba(0,0,0,0.06);
+}
+.main-image img {
+  width: 100%;
+  height: auto;
+  display: block;
+  object-fit: cover;
+}
+
+/* --- Colonne droite : infos --- */
 .detail-right {
-    flex: 1 1 350px;
+  flex: 1 1 400px;
+  min-width: 300px;
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
 }
 
 .annonce-title {
-    font-size: 30px;
-    color: #ff7a00;
-    font-weight: 700;
-    margin-bottom: 10px;
+  font-size: 26px;
+  font-weight: 600;
+  color: #222;
+  margin-bottom: 8px;
 }
 
 .categorie-line {
-    font-size: 15px;
-    color: #555;
-    margin-bottom: 15px;
+  font-size: 14px;
+  color: #555;
 }
 
 .prix-detail {
-    color: #ff7a00;
-    font-size: 26px;
-    font-weight: 700;
-    margin-bottom: 20px;
+  font-size: 22px;
+  color: #009432;
+  margin: 6px 0;
 }
 
-.description-full p {
-    font-size: 15px;
-    line-height: 1.7;
-    color: #444;
-    background: #fff7ef;
-    padding: 15px;
-    border-left: 4px solid #ff7a00;
-    border-radius: 6px;
+.description-full {
+  font-size: 15px;
+  color: #444;
+  line-height: 1.5;
+  margin-bottom: 14px;
 }
 
-/* ===============================
-   BOUTONS CONTACT
-=============================== */
+/* --- Boutons contact --- */
 .contact-actions {
-    display: flex;
-    gap: 12px;
-    margin: 20px 0;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin-bottom: 12px;
 }
 
-.btn-whatsapp, .btn-mail {
-    padding: 10px 18px;
-    text-decoration: none;
-    color: white;
-    border-radius: 8px;
-    font-weight: 600;
-    font-size: 14px;
-    transition: 0.3s;
+.btn {
+  padding: 10px 16px;
+  border-radius: 8px;
+  font-size: 15px;
+  font-weight: 500;
+  text-decoration: none;
+  color: #fff;
+  transition: 0.2s;
 }
 
 .btn-whatsapp {
-    background: #25d366;
+  background: #25D366;
+}
+.btn-whatsapp:hover {
+  background: #1ebc59;
 }
 
 .btn-mail {
-    background: #ff7a00;
+  background: #0984e3;
 }
-
-.btn-whatsapp:hover,
 .btn-mail:hover {
-    opacity: 0.85;
+  background: #086ec1;
 }
 
-/* ===============================
-   DATE
-=============================== */
 .pub-date {
-    font-size: 13px;
-    color: #666;
-    margin-top: 10px;
+  font-size: 13px;
+  color: #777;
+  margin-top: auto;
 }
 
-/* ===============================
-   RESPONSIVE
-=============================== */
-@media (max-width: 800px) {
-    .main-image img {
-        height: 270px;
-    }
-
-    .annonce-title {
-        font-size: 25px;
-    }
-
-    .prix-detail {
-        font-size: 22px;
-    }
-
-    .autres-annonces ul {
-        grid-template-columns: repeat(auto-fill, minmax(120px, 1fr));
-    }
+/* === Section annonces similaires === */
+.similaires-section {
+  width: 90%;
+  max-width: 1100px;
+  margin: 40px auto 60px;
 }
 
-@media (max-width: 500px) {
-    .detail-wrap {
-        padding: 15px;
-    }
-
-    .main-image img {
-        height: 230px;
-    }
-
-    .autres-annonces ul {
-        grid-template-columns: repeat(auto-fill, minmax(110px, 1fr));
-    }
+.similaires-section h2 {
+  font-size: 22px;
+  font-weight: 600;
+  color: #222;
+  margin-bottom: 20px;
 }
 
+.similaires-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+  gap: 20px;
+}
+
+/* --- Cartes --- */
+.grid-card {
+  background: #fff;
+  border: 1px solid #e6e6e6;
+  border-radius: 10px;
+  overflow: hidden;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.04);
+  transition: transform 0.15s;
+}
+
+.grid-card:hover {
+  transform: scale(1.02);
+}
+
+.grid-img {
+  width: 100%;
+  height: 160px;
+  object-fit: cover;
+  display: block;
+}
+
+.grid-caption {
+  padding: 12px;
+}
+.grid-caption h3 {
+  font-size: 16px;
+  color: #222;
+  margin: 0 0 8px;
+}
+.grid-caption .prix {
+  font-size: 15px;
+  font-weight: 500;
+  color: #009432;
+}
+
+/* === Responsive Mobile === */
+@media (max-width: 768px) {
+
+  .detail-wrap {
+    flex-direction: column;
+    margin: 20px auto;
+  }
+
+  .detail-left, .detail-right {
+    flex: 1 1 auto;
+    min-width: auto;
+  }
+
+  .main-image {
+    height: auto;
+  }
+
+  .annonce-title {
+    font-size: 22px;
+  }
+
+  .prix-detail {
+    font-size: 20px;
+  }
+
+  .description-full {
+    font-size: 14px;
+  }
+
+  .btn {
+    width: 100%;
+    text-align: center;
+  }
+}
 
 
 /* -------------------------- Partie temporaire------------------------------------ */
