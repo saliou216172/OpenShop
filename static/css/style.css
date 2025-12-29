@@ -433,49 +433,46 @@
 
 /*  --------------------------------sous-annonces.html------------------------------------*/
 
-/* sous_annonces.css */
+/* Conteneur principal */
 .annonces-container {
-    width: 90%;
-    max-width: 1100px;
-    margin: 40px auto;
-    font-family: "Poppins", sans-serif;
+    max-width: 1200px;
+    margin: auto;
+    padding: 20px;
 }
 
 .titre-page {
+    text-align: center;
+    margin-bottom: 30px;
     font-size: 26px;
-    font-weight: 600;
-    margin-bottom: 25px;
-    color: #111;
+    font-weight: bold;
 }
 
+/* Grille 2 par ligne */
 .annonces-list {
-    display: flex;
-    flex-direction: column;
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
     gap: 25px;
 }
 
-/* --- CARTE --- */
+/* Carte annonce */
 .annonce-card {
-    display: flex;
-    padding: 18px;
-    border-radius: 12px;
     background: #fff;
-    border: 1px solid #e6e6e6;
-    box-shadow: 0 3px 8px rgba(0,0,0,0.05);
-    transition: 0.2s;
+    border-radius: 10px;
+    overflow: hidden;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+    transition: transform 0.2s ease;
 }
 
 .annonce-card:hover {
-    transform: scale(1.01);
+    transform: translateY(-4px);
 }
 
-/* --- IMAGE --- */
+/* Image */
 .img-wrapper {
-    width: 180px;
-    height: 150px;
+    width: 100%;
+    height: 220px;
     overflow: hidden;
-    border-radius: 10px;
-    flex-shrink: 0;
+    background: #f5f5f5;
 }
 
 .img-wrapper img {
@@ -484,177 +481,103 @@
     object-fit: cover;
 }
 
-/* --- INFORMATIONS --- */
+/* Infos */
 .infos {
-    margin-left: 18px;
-    flex: 1;
+    padding: 15px;
 }
 
-.titre a {
-    font-size: 20px;
-    font-weight: 600;
-    color: #222;
-    text-decoration: none;
-}
-
-.titre a:hover {
-    color: #007bff;
+.titre {
+    font-size: 18px;
+    font-weight: bold;
+    margin-bottom: 10px;
 }
 
 .description {
-    margin: 8px 0 10px;
-    color: #444;
     font-size: 14px;
+    color: #555;
+    margin-bottom: 12px;
 }
 
+/* Prix + date */
 .meta {
-    font-size: 14px;
-    margin-bottom: 12px;
     display: flex;
     justify-content: space-between;
-    color: #555;
+    font-size: 14px;
+    margin-bottom: 15px;
 }
 
 .prix {
     font-weight: bold;
-    font-size: 16px;
-    color: #009432;
+    color: #2e7d32;
 }
 
-/* --- BOUTONS --- */
+.date {
+    color: #777;
+}
+
+/* Boutons */
 .contact-buttons {
     display: flex;
     gap: 10px;
-    flex-wrap: wrap;
 }
 
 .btn {
-    padding: 8px 14px;
-    border-radius: 8px;
+    flex: 1;
+    text-align: center;
+    padding: 8px;
+    border-radius: 5px;
     font-size: 14px;
-    font-weight: 500;
     text-decoration: none;
     color: #fff;
-    transition: 0.2s;
 }
 
 .btn.whatsapp {
-    background: #25D366;
-}
-
-.btn.whatsapp:hover {
-    background: #1ebc59;
+    background-color: #25D366;
 }
 
 .btn.email {
-    background: #0984e3;
+    background-color: #1976d2;
 }
 
-.btn.email:hover {
-    background: #086ec1;
-}
-
-.btn.voir {
-    background: #333;
-}
-
-.btn.voir:hover {
-    background: #000;
-}
-
-/* --- MESSAGE VIDE --- */
-.empty {
-    font-size: 17px;
-    color: #777;
-    text-align: center;
-    margin-top: 40px;
-}
-
-/* --- RESPONSIVE --- */
+/* Responsive */
 @media (max-width: 768px) {
-    .annonce-card {
-        flex-direction: column;
-        text-align: center;
+    .annonces-list {
+        grid-template-columns: 1fr;
+    }
+}
+@media (max-width: 480px) {
+
+    .titre-page {
+        font-size: 22px;
     }
 
     .img-wrapper {
-        width: 100%;
-        height: 200px;
-        margin-bottom: 15px;
+        height: 180px;
     }
 
-    .infos {
-        margin-left: 0;
-    }
-
-    .meta {
-        justify-content: center;
-        gap: 15px;
-    }
-
-    .contact-buttons {
-        justify-content: center;
-    }
-}
-
-/* --- RESPONSIVE MOBILE OPTIMISÉ --- */
-@media (max-width: 768px) {
-
-    .annonce-card {
-        flex-direction: column;
-        padding: 15px;
-        border-radius: 14px;
-    }
-
-    .img-wrapper {
-        width: 100%;
-        height: 260px;
-        border-radius: 12px;
-        margin-bottom: 12px;
-    }
-
-    .infos {
-        margin-left: 0;
-        text-align: center;
-    }
-
-    .titre a {
-        font-size: 18px;
+    .titre {
+        font-size: 16px;
     }
 
     .description {
-        font-size: 14px;
-        line-height: 1.45;
-        margin-bottom: 12px;
+        font-size: 13px;
     }
 
     .meta {
-        font-size: 14px;
-        display: flex;
         flex-direction: column;
-        gap: 4px;
-        align-items: center;
-    }
-
-    .prix {
-        font-size: 18px;
-        color: #009432;
+        gap: 6px;
     }
 
     .contact-buttons {
-        margin-top: 12px;
-        display: flex;
         flex-direction: column;
-        gap: 10px;
     }
 
     .btn {
-        width: 100%;
+        font-size: 15px;
         padding: 12px;
-        font-size: 16px;
-        border-radius: 10px;
     }
 }
+
 
 /*----------------------------annonce_details--------------------------------  */
 /* === Conteneur global === */

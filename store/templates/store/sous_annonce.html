@@ -2,10 +2,8 @@
 {% load static %}
 {% block content %}
 
-<link rel="stylesheet" href="{% static 'css/sous_annonces.css' %}">
-
 <div class="annonces-container">
-    
+
     <h2 class="titre-page">Annonces – {{ souscategorie.nom }}</h2>
 
     {% if annonces %}
@@ -14,27 +12,29 @@
             <div class="annonce-card">
 
                 <!-- Image -->
-                <a href="{% url 'store:detail_annonce' annonce.id %}" class="img-wrapper">
+                <div class="img-wrapper">
                     {% if annonce.photo %}
                         <img src="{{ annonce.photo.url }}" alt="{{ annonce.titre }}">
                     {% else %}
                         <img src="{% static 'images/default.png' %}" alt="Image par défaut">
                     {% endif %}
-                </a>
+                </div>
 
                 <!-- Contenu -->
                 <div class="infos">
 
-                    <h3 class="titre">
-                        <a href="{% url 'store:detail_annonce' annonce.id %}">{{ annonce.titre }}</a>
-                    </h3>
+                    <h3 class="titre">{{ annonce.titre }}</h3>
 
                     <p class="description">
                         {{ annonce.description|truncatewords:25 }}
                     </p>
 
                     <div class="meta">
-                        <span class="prix">{{ annonce.prix }} GNF</span>
+                        {% if annonce.prix %}
+                            <span class="prix">{{ annonce.prix }} GNF</span>
+                        {% else %}
+                            <span class="prix">Prix non défini</span>
+                        {% endif %}
                         <span class="date">{{ annonce.date_pub }}</span>
                     </div>
 
@@ -42,24 +42,19 @@
 
                         {% if annonce.telephone %}
                         <a class="btn whatsapp"
-                         href="https://wa.me/{{ annonce.telephone }}"
-
+                           href="https://wa.me/{{ annonce.telephone }}"
                            target="_blank">
                            WhatsApp
                         </a>
                         {% endif %}
 
-                        {% if annonce.email %}
+                        {% if annonce.email_contact %}
                         <a class="btn email"
-                           href="mailto:{{ annonce.email }}">
+                           href="mailto:{{ annonce.email_contact }}">
                            Email
                         </a>
                         {% endif %}
 
-                        <a class="btn voir"
-                           href="{% url 'store:detail_annonce' annonce.id %}">
-                           Voir l’annonce
-                        </a>
                     </div>
 
                 </div>
