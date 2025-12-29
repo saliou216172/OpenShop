@@ -1,6 +1,5 @@
 {% extends 'base.html' %}
 {% load static %}
-{% load phonesfilters %}
 {% block content %}
 
 <link rel="stylesheet" href="{% static 'css/sous_annonces.css' %}">
@@ -43,7 +42,7 @@
 
                         {% if annonce.telephone %}
                         <a class="btn whatsapp"
-                         href="https://wa.me/{{ annonce.telephone|digits }}"
+                         href="https://wa.me/{{ annonce.telephone }}"
 
                            target="_blank">
                            WhatsApp
