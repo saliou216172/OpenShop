@@ -42,7 +42,8 @@
 
                         {% if annonce.telephone %}
                         <a class="btn whatsapp"
-                           href="https://wa.me/{{ annonce.telephone|regex_replace:'[^0-9]','' }}"
+                         href="https://wa.me/{{ annonce.telephone|digits }}"
+
                            target="_blank">
                            WhatsApp
                         </a>
