@@ -149,6 +149,92 @@
     }
 }
 
+/* -------------------------------------HERO SETION -----------------------------------*/
+/* ================= HERO SECTION ================= */
+
+.hero {
+  background: linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.5)),
+              url("/static/images/hero-bg.jpg");
+  background-size: cover;
+  background-position: center;
+  padding: 100px 20px;
+  text-align: center;
+  color: white;
+}
+
+.hero-content h1 {
+  font-size: 38px;
+  margin-bottom: 15px;
+}
+
+.hero-content p {
+  font-size: 18px;
+  margin-bottom: 25px;
+}
+
+.btn-hero {
+  background: #ff7f00;
+  color: white;
+  padding: 14px 30px;
+  border-radius: 30px;
+  text-decoration: none;
+  font-weight: 600;
+  transition: 0.3s;
+}
+
+.btn-hero:hover {
+  background: #e86f00;
+}
+
+
+/* ------------------VEDETTE HOME--------------------------------------------------------*/
+
+/* ================= PREMIUM SECTION ================= */
+
+.premium-section {
+  background: linear-gradient(135deg, #ff7f00, #ffb347);
+  padding: 60px 20px;
+  margin-top: 40px;
+  color: white;
+}
+
+.premium-container {
+  max-width: 1000px;
+  margin: auto;
+  text-align: center;
+}
+
+.premium-text h2 {
+  font-size: 28px;
+  margin-bottom: 15px;
+  font-weight: 700;
+}
+
+.premium-text p {
+  font-size: 16px;
+  margin-bottom: 25px;
+  opacity: 0.95;
+}
+
+.btn-premium {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  background: white;
+  color: #ff7f00;
+  padding: 14px 28px;
+  border-radius: 30px;
+  text-decoration: none;
+  font-weight: 600;
+  transition: all 0.3s ease;
+  box-shadow: 0 5px 20px rgba(0,0,0,0.2);
+}
+
+.btn-premium:hover {
+  background: #f5f5f5;
+  transform: translateY(-3px);
+}
+
 
 
 /* CATEGRIES dans home */

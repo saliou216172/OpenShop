@@ -2,6 +2,18 @@
 {% block content %}
 {% load static %}
 
+
+<section class="hero">
+  <div class="hero-content">
+    <h1>Achetez et vendez facilement en Guinée</h1>
+    <p>Des milliers d’annonces disponibles près de chez vous.</p>
+    <a href="{% url 'store:creer_annonce' %}" class="btn-hero">
+      Publier une annonce
+    </a>
+  </div>
+</section>
+
+
 <div class="categories-container">
     {% for categorie in categories %}
         <a href="{% url 'store:annonces_par_categorie' categorie.id %}" class="categorie-card">
@@ -19,6 +31,23 @@
 
   </div>
 </section>
+
+<!-- SECTION ANNONCE EN VEDETTE -->
+<section class="premium-section">
+  <div class="container premium-container">
+    <div class="premium-text">
+      <h2>Boostez votre annonce 🚀</h2>
+      <p>
+        Mettez votre annonce en avant pour plus de visibilité et plus de ventes.
+        Contactez-nous pour activer l'option Premium.
+      </p>
+      <a href="https://wa.me/224622952468" class="btn-premium">
+        <i class="fa fa-star"></i> Mettre en avant mon annonce
+      </a>
+    </div>
+  </div>
+</section>
+
 
 
 <!-- Catégories en avant -->
