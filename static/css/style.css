@@ -186,6 +186,54 @@
   background: #e86f00;
 }
 
+/* ================= RESPONSIVE MOBILE ================= */
+@media (max-width: 768px) {
+
+  .hero {
+    padding: 70px 15px;
+    background-position: center;
+  }
+
+  .hero-content h1 {
+    font-size: 26px;
+    line-height: 1.3;
+  }
+
+  .hero-content p {
+    font-size: 15px;
+  }
+
+  .btn-hero {
+    display: block;
+    width: 100%;
+    max-width: 280px;
+    margin: 0 auto;
+    padding: 12px 20px;
+    font-size: 14px;
+  }
+
+  /* PREMIUM SECTION */
+  .premium-section {
+    padding: 40px 15px;
+  }
+
+  .premium-text h2 {
+    font-size: 22px;
+  }
+
+  .premium-text p {
+    font-size: 14px;
+  }
+
+  .btn-premium {
+    width: 100%;
+    max-width: 280px;
+    justify-content: center;
+    padding: 12px 20px;
+    font-size: 14px;
+  }
+
+}
 
 /* ------------------VEDETTE HOME--------------------------------------------------------*/
 
