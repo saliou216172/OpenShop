@@ -3,6 +3,14 @@
 {% load static %}
 
 
+<div class="categories-container">
+    {% for categorie in categories %}
+        <a href="{% url 'store:annonces_par_categorie' categorie.id %}" class="categorie-card">
+            {{ categorie.nom }}
+        </a>
+    {% endfor %}
+</div>
+
 <section class="hero">
   <div class="hero-content">
     <h1>Achetez et vendez facilement en Guinée</h1>
@@ -12,15 +20,6 @@
     </a>
   </div>
 </section>
-
-
-<div class="categories-container">
-    {% for categorie in categories %}
-        <a href="{% url 'store:annonces_par_categorie' categorie.id %}" class="categorie-card">
-            {{ categorie.nom }}
-        </a>
-    {% endfor %}
-</div>
 
 <section class="deposer-annonce">
   <div class="container">
