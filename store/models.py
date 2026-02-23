@@ -3,6 +3,7 @@ from django.db import models
 from django.conf import settings
 from PIL import Image as image
 from django.core.exceptions import ValidationError
+from django.utils import timezone 
 
 class Categorie(models.Model):
     nom = models.CharField(max_length=50, unique=True)
@@ -38,22 +39,26 @@ class Annonce(models.Model):
     email_contact = models.EmailField(null=True, blank=True)
     date_pub = models.DateField(auto_now_add=True)
 
+    # PREMIUM
+    is_premium = models.BooleanField(default=False)
+    premium_until = models.DateTimeField(null=True, blank=True)
+
+    def is_active_premium(self):
+        return self.is_premium and self.premium_until and self.premium_until >= timezone.now()
+
     def save(self, *args, **kwargs):
+        if not self.pk:
+            nb_annonces = Annonce.objects.filter(auteur=self.auteur).count()
+            if nb_annonces >= 5:
+                raise ValidationError("Vous avez atteint la limite de 5 annonces.")
 
-    # Vérifie seulement si c'est une nouvelle annonce
-      if not self.pk:
-        nb_annonces = Annonce.objects.filter(auteur=self.auteur).count()
-        if nb_annonces >= 5:
-            raise ValidationError("Vous avez atteint la limite de 5 annonces.")
+        super().save(*args, **kwargs)
 
-      super().save(*args, **kwargs)
-
-       # Redimensionnement image
-      if self.photo:
-         img = image.open(self.photo.path)
-         max_size = (800, 600)
-         img.thumbnail(max_size)
-         img.save(self.photo.path)
+        if self.photo:
+            img = image.open(self.photo.path)
+            max_size = (800, 600)
+            img.thumbnail(max_size)
+            img.save(self.photo.path)
 
     def __str__(self):
         return f"{self.titre} - {self.categorie.nom} - {self.sous_categorie.nom if self.sous_categorie else ''}"

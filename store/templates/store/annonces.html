@@ -21,6 +21,11 @@
     {% if annonces %}
       {% for annonce in annonces %}
         <article class="grid-card">
+
+          {% if annonce.is_active_premium %}
+             <span class="badge-premium">Premium</span>
+          {% endif %}
+
           <a href="{% url 'store:detail_annonce' annonce.id %}">
             {% if annonce.photo %}
               <img class="grid-img" src="{{ annonce.photo.url }}" alt="{{ annonce.titre }}">

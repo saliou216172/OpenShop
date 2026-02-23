@@ -3,6 +3,8 @@ from django.contrib.auth.decorators import login_required
 from django.http import JsonResponse
 from .forms import AnnonceForm
 from .models import Annonce, Categorie, SousCategorie
+from django.utils import timezone
+from django.db.models import Case, When, Value, IntegerField
 
 @login_required(login_url='authentication:login')
 def creer_annonce(request):
@@ -29,7 +31,19 @@ def home(request):
 def annonces_par_categorie(request, categorie_id):
     categorie = get_object_or_404(Categorie, id=categorie_id)
     sous_categories = categorie.sous_categories.all()
-    annonces = Annonce.objects.filter(categorie=categorie).order_by('-date_pub')
+    annonces = Annonce.objects.filter(
+    categorie=categorie
+    ).annotate(
+    premium_order=Case(
+        When(
+            is_premium=True,
+            premium_until__gte=timezone.now(),
+            then=Value(0)
+        ),
+        default=Value(1),
+        output_field=IntegerField()
+    )
+    ).order_by('premium_order', '-date_pub')
 
     return render(request, 'store/annonces.html', {
         'categorie': categorie,
@@ -41,7 +55,20 @@ def annonces_par_categorie(request, categorie_id):
 def annonces_par_souscategorie(request, souscategorie_id):
     souscategorie = get_object_or_404(SousCategorie, id=souscategorie_id)
     # affiche une liste verticale d'annonces, les plus récentes en haut
-    annonces = Annonce.objects.filter(sous_categorie_id=souscategorie.id).order_by('-date_pub')
+    annonces = Annonce.objects.filter(
+    sous_categorie_id=souscategorie.id
+    ).annotate(
+    premium_order=Case(
+        When(
+            is_premium=True,
+            premium_until__gte=timezone.now(),
+            then=Value(0)
+        ),
+        default=Value(1),
+        output_field=IntegerField()
+    )
+    ).order_by('premium_order', '-date_pub')
+    
     return render(request, 'store/sous_annonce.html', {
         'annonces': annonces,
         'souscategorie': souscategorie

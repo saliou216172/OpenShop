@@ -262,6 +262,7 @@
   font-size: 16px;
   margin-bottom: 25px;
   opacity: 0.95;
+  color:rgba(0, 0, 0, 0.12)
 }
 
 .btn-premium {
@@ -282,10 +283,28 @@
   background: #f5f5f5;
   transform: translateY(-3px);
 }
+ 
+/* ---------------------------------Premium--------------------------------------------------*/
 
+.grid-card,
+.annonce-card {
+  position: relative;
+}
 
+.badge-premium {
+  position: absolute;
+  top: 10px;
+  left: 10px;
+  background: gold;
+  color: black;
+  padding: 6px 12px;
+  font-size: 12px;
+  font-weight: bold;
+  border-radius: 20px;
+  z-index: 10;
+}
 
-/* CATEGRIES dans home */
+/*------------------------------ CATEGRIES dans home---------------------------------------- */
 
 /* === CONTENEUR DES CATÉGORIES === */
 .categories-container {
@@ -906,48 +925,6 @@
 }
 
 
-/* -------------------------- Partie temporaire------------------------------------ */
-
- .info-section {
-    padding: 50px 0;
-    background-color: #fff8f2;
-    text-align: center;
-}
-
-.info-section h2 {
-    font-size: 28px;
-    margin-bottom: 30px;
-    color: #333;
-}
-
-.info-cards {
-    position: relative;
-    width: 100%;
-    max-width: 900px;  /* largeur maximale sur PC */
-    margin: 0 auto;
-    overflow: hidden;   /* empêche le scroll horizontal */
-    height: 180px;      /* fixe la hauteur pour toutes les cartes */
-}
-
-.card {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    opacity: 0;
-    transition: opacity 0.5s ease-in-out;
-    padding: 20px;
-    background-color: #ffedd8;
-    border-radius: 10px;
-    box-shadow: 0 3px 10px rgba(0,0,0,0.1);
-}
-
-.card.active {
-    opacity: 1;
-}
-
-/* Fin parite temporaire */
-
 
 /* Publier annonce */
 .container {
@@ -1077,4 +1054,173 @@ input:focus, textarea:focus, select:focus {
   padding-top: 15px;
   font-size: 13px;
   color: #aaa;
+}
+
+/* ----------------------------------------comment ça marche-----------------------*/
+/* ===== SECTION COMMENT ÇA MARCHE ===== */
+
+.how-it-works {
+  background: #f9fafc;
+  padding: 80px 20px;
+}
+
+.section-title {
+  text-align: center;
+  font-size: 32px;
+  font-weight: 700;
+  margin-bottom: 60px;
+  color: #222;
+}
+
+.steps {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 30px;
+  max-width: 1100px;
+  margin: auto;
+}
+
+.step-card {
+  background: white;
+  padding: 40px 25px;
+  border-radius: 16px;
+  text-align: center;
+  box-shadow: 0 10px 30px rgba(0,0,0,0.06);
+  transition: all 0.3s ease;
+  position: relative;
+}
+
+.step-card:hover {
+  transform: translateY(-8px);
+  box-shadow: 0 15px 40px rgba(0,0,0,0.1);
+}
+
+.step-number {
+  width: 55px;
+  height: 55px;
+  background: linear-gradient(135deg, #ff7f00, #ff5500);
+  color: white;
+  font-weight: bold;
+  font-size: 20px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0 auto 20px auto;
+}
+
+.step-card h3 {
+  font-size: 20px;
+  margin-bottom: 15px;
+  color: #333;
+}
+
+.step-card p {
+  font-size: 15px;
+  color: #666;
+  line-height: 1.6;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .section-title {
+    font-size: 24px;
+  }
+
+  .step-card {
+    padding: 30px 20px;
+  }
+}
+
+/* ============================= */
+/*         THEME VERT PRO        */
+/* ============================= */
+
+:root {
+  --primary-color: #1f8f4e;
+  --primary-hover: #167a42;
+  --light-bg: #e9f7ef;
+  --premium-gradient: linear-gradient(135deg, #1f8f4e, #43b97f);
+}
+
+/* Logo */
+.logo a {
+  color: var(--primary-color);
+}
+
+/* Liens hover */
+.nav-links li a:hover {
+  color: var(--primary-color);
+}
+
+/* Boutons principaux */
+.btn-hero,
+.btn-deposer,
+.btn {
+  background-color: var(--primary-color);
+}
+
+.btn-hero:hover,
+.btn-deposer:hover,
+.btn:hover {
+  background-color: var(--primary-hover);
+}
+
+/* Hero button */
+.btn-hero {
+  background: var(--primary-color);
+}
+
+/* Section déposer annonce */
+.deposer-annonce {
+  background: var(--light-bg);
+  border-top: 1px solid #ccebd8;
+  border-bottom: 1px solid #b7e3cb;
+}
+
+/* Premium section */
+.premium-section {
+  background: var(--premium-gradient);
+}
+
+.btn-premium {
+  color: var(--primary-color);
+}
+
+/* Prix annonces */
+.grid-caption .prix,
+.prix-detail {
+  color: var(--primary-color);
+}
+
+/* Sous catégories */
+.sous-categorie-link {
+  background: var(--primary-color);
+}
+
+.sous-categorie-link:hover {
+  background: var(--primary-hover);
+}
+
+/* Step numbers (Comment ça marche) */
+.step-number {
+  background: var(--premium-gradient);
+}
+
+/* Champs focus */
+input:focus,
+textarea:focus,
+select:focus {
+  border-color: var(--primary-color);
+  box-shadow: 0 0 4px rgba(31, 143, 78, 0.3);
+}
+
+/* WhatsApp reste vert officiel */
+.btn-whatsapp {
+  background: #25D366;
+}
+
+/* NE TOUCHE PAS AU FOOTER */
+.footer {
+  background: #222;
 }
